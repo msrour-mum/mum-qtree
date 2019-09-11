@@ -16,7 +16,9 @@ public class ExampleController {
     {
         ExampleService questionSrv = new ExampleService();
 
-        return questionSrv.getQuestions();
+       // return questionSrv.getQuestions();
+
+        return null;
 
 
     }
@@ -26,7 +28,9 @@ public class ExampleController {
     {
         ExampleService questionSrv = new ExampleService();
 
-        return new Question(6, "q6");
+        //return new Question(6, "q6");
+
+        return null;
 
 
     }

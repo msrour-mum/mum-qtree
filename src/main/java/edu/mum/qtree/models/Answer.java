@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import java.sql.Timestamp;
 
 @Entity
-public class Question {
+public class Answer {
     private long id;
     private String text;
     private Timestamp creationDate;
@@ -47,11 +47,11 @@ public class Question {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Question question = (Question) o;
+        Answer answer = (Answer) o;
 
-        if (id != question.id) return false;
-        if (text != null ? !text.equals(question.text) : question.text != null) return false;
-        if (creationDate != null ? !creationDate.equals(question.creationDate) : question.creationDate != null)
+        if (id != answer.id) return false;
+        if (text != null ? !text.equals(answer.text) : answer.text != null) return false;
+        if (creationDate != null ? !creationDate.equals(answer.creationDate) : answer.creationDate != null)
             return false;
 
         return true;
