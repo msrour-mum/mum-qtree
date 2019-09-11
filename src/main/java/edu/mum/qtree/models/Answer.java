@@ -5,6 +5,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.sql.Timestamp;
+import java.util.Objects;
 
 @Entity
 public class Answer {
@@ -46,22 +47,14 @@ public class Answer {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         Answer answer = (Answer) o;
-
-        if (id != answer.id) return false;
-        if (text != null ? !text.equals(answer.text) : answer.text != null) return false;
-        if (creationDate != null ? !creationDate.equals(answer.creationDate) : answer.creationDate != null)
-            return false;
-
-        return true;
+        return id == answer.id &&
+                Objects.equals(text, answer.text) &&
+                Objects.equals(creationDate, answer.creationDate);
     }
 
     @Override
     public int hashCode() {
-        int result = (int) (id ^ (id >>> 32));
-        result = 31 * result + (text != null ? text.hashCode() : 0);
-        result = 31 * result + (creationDate != null ? creationDate.hashCode() : 0);
-        return result;
+        return Objects.hash(id, text, creationDate);
     }
 }

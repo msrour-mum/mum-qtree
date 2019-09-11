@@ -1,6 +1,7 @@
 package edu.mum.qtree.models;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "question_tags", schema = "qtreedb", catalog = "")
@@ -22,17 +23,13 @@ public class QuestionTags {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         QuestionTags that = (QuestionTags) o;
-
-        if (id != that.id) return false;
-
-        return true;
+        return id == that.id;
     }
 
     @Override
     public int hashCode() {
-        return id;
+        return Objects.hash(id);
     }
 
     @ManyToOne

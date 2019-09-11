@@ -1,6 +1,7 @@
 package edu.mum.qtree.models;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "user_role", schema = "qtreedb", catalog = "")
@@ -32,19 +33,13 @@ public class UserRole {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         UserRole userRole = (UserRole) o;
-
-        if (id != userRole.id) return false;
-        if (name != null ? !name.equals(userRole.name) : userRole.name != null) return false;
-
-        return true;
+        return id == userRole.id &&
+                Objects.equals(name, userRole.name);
     }
 
     @Override
     public int hashCode() {
-        int result = id;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        return result;
+        return Objects.hash(id, name);
     }
 }

@@ -5,6 +5,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.sql.Timestamp;
+import java.util.Objects;
 
 @Entity
 public class User {
@@ -90,29 +91,18 @@ public class User {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         User user = (User) o;
-
-        if (id != user.id) return false;
-        if (isEnabled != user.isEnabled) return false;
-        if (email != null ? !email.equals(user.email) : user.email != null) return false;
-        if (name != null ? !name.equals(user.name) : user.name != null) return false;
-        if (password != null ? !password.equals(user.password) : user.password != null) return false;
-        if (createdOn != null ? !createdOn.equals(user.createdOn) : user.createdOn != null) return false;
-        if (modifiedOn != null ? !modifiedOn.equals(user.modifiedOn) : user.modifiedOn != null) return false;
-
-        return true;
+        return id == user.id &&
+                isEnabled == user.isEnabled &&
+                Objects.equals(email, user.email) &&
+                Objects.equals(name, user.name) &&
+                Objects.equals(password, user.password) &&
+                Objects.equals(createdOn, user.createdOn) &&
+                Objects.equals(modifiedOn, user.modifiedOn);
     }
 
     @Override
     public int hashCode() {
-        int result = id;
-        result = 31 * result + (email != null ? email.hashCode() : 0);
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (password != null ? password.hashCode() : 0);
-        result = 31 * result + (int) isEnabled;
-        result = 31 * result + (createdOn != null ? createdOn.hashCode() : 0);
-        result = 31 * result + (modifiedOn != null ? modifiedOn.hashCode() : 0);
-        return result;
+        return Objects.hash(id, email, name, password, isEnabled, createdOn, modifiedOn);
     }
 }

@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+    "-//Hibernate/Hibernate Configuration DTD//EN"
+    "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="connection.url"><![CDATA[jdbc:mysql://qtreedbserver.mysql.database.azure.com:3306/qtreedb?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC]]></property>
+    <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+      <mapping class="edu.mum.qtree.models.Answer"/>
+      <mapping class="edu.mum.qtree.models.Comment"/>
+      <mapping class="edu.mum.qtree.models.Community"/>
+      <mapping class="edu.mum.qtree.models.Company"/>
+      <mapping class="edu.mum.qtree.models.CompanyProfile"/>
+      <mapping class="edu.mum.qtree.models.CompanyProfileType"/>
+      <mapping class="edu.mum.qtree.models.Job"/>
+      <mapping class="edu.mum.qtree.models.Question"/>
+      <mapping class="edu.mum.qtree.models.QuestionTags"/>
+      <mapping class="edu.mum.qtree.models.Tag"/>
+      <mapping class="edu.mum.qtree.models.TextStatus"/>
+      <mapping class="edu.mum.qtree.models.User"/>
+      <mapping class="edu.mum.qtree.models.UserCommunity"/>
+      <mapping class="edu.mum.qtree.models.UserJobs"/>
+      <mapping class="edu.mum.qtree.models.UserRole"/>
+      <mapping class="edu.mum.qtree.models.Vote"/>
+      <!-- <property name="connection.username"/> -->
+    <!-- <property name="connection.password"/> -->
+
+    <!-- DB schema will be updated if needed -->
+    <!-- <property name="hibernate.hbm2ddl.auto">update</property> -->
+  </session-factory>
+</hibernate-configuration>

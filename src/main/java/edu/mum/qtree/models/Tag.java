@@ -4,6 +4,7 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.util.Objects;
 
 @Entity
 public class Tag {
@@ -34,19 +35,13 @@ public class Tag {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         Tag tag = (Tag) o;
-
-        if (id != tag.id) return false;
-        if (name != null ? !name.equals(tag.name) : tag.name != null) return false;
-
-        return true;
+        return id == tag.id &&
+                Objects.equals(name, tag.name);
     }
 
     @Override
     public int hashCode() {
-        int result = id;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        return result;
+        return Objects.hash(id, name);
     }
 }

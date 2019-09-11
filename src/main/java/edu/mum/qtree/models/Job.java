@@ -1,9 +1,10 @@
 package edu.mum.qtree.models;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
-public class Jobs {
+public class Job {
     private int id;
     private String jobTitle;
     private String jobDescritpion;
@@ -65,27 +66,17 @@ public class Jobs {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
-        Jobs jobs = (Jobs) o;
-
-        if (id != jobs.id) return false;
-        if (jobTitle != null ? !jobTitle.equals(jobs.jobTitle) : jobs.jobTitle != null) return false;
-        if (jobDescritpion != null ? !jobDescritpion.equals(jobs.jobDescritpion) : jobs.jobDescritpion != null)
-            return false;
-        if (jobType != null ? !jobType.equals(jobs.jobType) : jobs.jobType != null) return false;
-        if (jobRole != null ? !jobRole.equals(jobs.jobRole) : jobs.jobRole != null) return false;
-
-        return true;
+        Job job = (Job) o;
+        return id == job.id &&
+                Objects.equals(jobTitle, job.jobTitle) &&
+                Objects.equals(jobDescritpion, job.jobDescritpion) &&
+                Objects.equals(jobType, job.jobType) &&
+                Objects.equals(jobRole, job.jobRole);
     }
 
     @Override
     public int hashCode() {
-        int result = id;
-        result = 31 * result + (jobTitle != null ? jobTitle.hashCode() : 0);
-        result = 31 * result + (jobDescritpion != null ? jobDescritpion.hashCode() : 0);
-        result = 31 * result + (jobType != null ? jobType.hashCode() : 0);
-        result = 31 * result + (jobRole != null ? jobRole.hashCode() : 0);
-        return result;
+        return Objects.hash(id, jobTitle, jobDescritpion, jobType, jobRole);
     }
 
     @ManyToOne
