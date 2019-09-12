@@ -6,7 +6,7 @@
   <session-factory>
     <property name="connection.url"><![CDATA[jdbc:mysql://qtreedbserver.mysql.database.azure.com:3306/qtreedb?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC]]></property>
     <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
-      <mapping class="edu.mum.qtree.models.Answer"/>
+    <mapping class="edu.mum.qtree.models.Answer"/>
       <mapping class="edu.mum.qtree.models.Comment"/>
       <mapping class="edu.mum.qtree.models.Community"/>
       <mapping class="edu.mum.qtree.models.Company"/>

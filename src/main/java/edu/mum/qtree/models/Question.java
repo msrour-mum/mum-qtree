@@ -1,10 +1,8 @@
 package edu.mum.qtree.models;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
@@ -14,6 +12,8 @@ public class Question {
     private Timestamp creationDate;
     private short statusId;
     private int userId;
+    private Collection<Answer> answersById;
+    private Collection<QuestionTags> questionTagsById;
 
     @Id
     @Column(name = "ID", nullable = false)
@@ -80,5 +80,23 @@ public class Question {
     @Override
     public int hashCode() {
         return Objects.hash(id, text, creationDate, statusId, userId);
+    }
+
+    @OneToMany(mappedBy = "questionByQuestionId")
+    public Collection<Answer> getAnswersById() {
+        return answersById;
+    }
+
+    public void setAnswersById(Collection<Answer> answersById) {
+        this.answersById = answersById;
+    }
+
+    @OneToMany(mappedBy = "questionByQuestionId")
+    public Collection<QuestionTags> getQuestionTagsById() {
+        return questionTagsById;
+    }
+
+    public void setQuestionTagsById(Collection<QuestionTags> questionTagsById) {
+        this.questionTagsById = questionTagsById;
     }
 }

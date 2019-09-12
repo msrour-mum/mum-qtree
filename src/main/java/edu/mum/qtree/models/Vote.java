@@ -9,6 +9,7 @@ public class Vote {
     private boolean like;
     private User userByUserId;
     private Answer answerByAnswerId;
+    private int userId;
 
     @Id
     @Column(name = "ID", nullable = false)
@@ -44,23 +45,15 @@ public class Vote {
         return Objects.hash(id, like);
     }
 
-    @ManyToOne
-    @JoinColumn(name = "user_ID", referencedColumnName = "ID", nullable = false)
-    public User getUserByUserId() {
-        return userByUserId;
+
+
+    @Basic
+    @Column(name = "user_ID", nullable = false)
+    public int getUserId() {
+        return userId;
     }
 
-    public void setUserByUserId(User userByUserId) {
-        this.userByUserId = userByUserId;
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "answer_ID", referencedColumnName = "ID", nullable = false)
-    public Answer getAnswerByAnswerId() {
-        return answerByAnswerId;
-    }
-
-    public void setAnswerByAnswerId(Answer answerByAnswerId) {
-        this.answerByAnswerId = answerByAnswerId;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 }

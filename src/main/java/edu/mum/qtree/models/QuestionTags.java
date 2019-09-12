@@ -9,6 +9,16 @@ public class QuestionTags {
     private int id;
     private Question questionByQuestionId;
 
+    @ManyToOne
+    @JoinColumn(name = "question_ID", referencedColumnName = "ID", nullable = false)
+    public Question getQuestionByQuestionId() {
+        return questionByQuestionId;
+    }
+
+    public void setQuestionByQuestionId(Question questionByQuestionId) {
+        this.questionByQuestionId = questionByQuestionId;
+    }
+
     @Id
     @Column(name = "ID", nullable = false)
     public int getId() {
@@ -32,13 +42,6 @@ public class QuestionTags {
         return Objects.hash(id);
     }
 
-    @ManyToOne
-    @JoinColumn(name = "question_ID", referencedColumnName = "ID", nullable = false)
-    public Question getQuestionByQuestionId() {
-        return questionByQuestionId;
-    }
 
-    public void setQuestionByQuestionId(Question questionByQuestionId) {
-        this.questionByQuestionId = questionByQuestionId;
-    }
+
 }

@@ -10,6 +10,8 @@ public class Comment {
     private String text;
     private Timestamp creationDate;
     private Answer answerByAnswerId;
+    private short statusId;
+    private int userId;
 
     @Id
     @Column(name = "ID", nullable = false)
@@ -64,5 +66,25 @@ public class Comment {
 
     public void setAnswerByAnswerId(Answer answerByAnswerId) {
         this.answerByAnswerId = answerByAnswerId;
+    }
+
+    @Basic
+    @Column(name = "Status_ID", nullable = false)
+    public short getStatusId() {
+        return statusId;
+    }
+
+    public void setStatusId(short statusId) {
+        this.statusId = statusId;
+    }
+
+    @Basic
+    @Column(name = "User_ID", nullable = false)
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 }
