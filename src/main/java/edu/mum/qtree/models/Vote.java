@@ -1,6 +1,7 @@
 package edu.mum.qtree.models;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 public class Vote {
@@ -8,6 +9,7 @@ public class Vote {
     private boolean like;
     private User userByUserId;
     private Answer answerByAnswerId;
+    private int userId;
 
     @Id
     @Column(name = "ID", nullable = false)
@@ -33,39 +35,25 @@ public class Vote {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         Vote vote = (Vote) o;
-
-        if (id != vote.id) return false;
-        if (like != vote.like) return false;
-
-        return true;
+        return id == vote.id &&
+                like == vote.like;
     }
 
     @Override
     public int hashCode() {
-        int result = id;
-        result = 31 * result + (like ? 1 : 0);
-        return result;
+        return Objects.hash(id, like);
     }
 
-    @ManyToOne
-    @JoinColumn(name = "user_ID", referencedColumnName = "ID", nullable = false)
-    public User getUserByUserId() {
-        return userByUserId;
+
+
+    @Basic
+    @Column(name = "user_ID", nullable = false)
+    public int getUserId() {
+        return userId;
     }
 
-    public void setUserByUserId(User userByUserId) {
-        this.userByUserId = userByUserId;
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "answer_ID", referencedColumnName = "ID", nullable = false)
-    public Answer getAnswerByAnswerId() {
-        return answerByAnswerId;
-    }
-
-    public void setAnswerByAnswerId(Answer answerByAnswerId) {
-        this.answerByAnswerId = answerByAnswerId;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 }

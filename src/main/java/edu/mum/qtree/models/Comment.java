@@ -2,6 +2,7 @@ package edu.mum.qtree.models;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Objects;
 
 @Entity
 public class Comment {
@@ -9,6 +10,8 @@ public class Comment {
     private String text;
     private Timestamp creationDate;
     private Answer answerByAnswerId;
+    private short statusId;
+    private int userId;
 
     @Id
     @Column(name = "ID", nullable = false)
@@ -44,23 +47,15 @@ public class Comment {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         Comment comment = (Comment) o;
-
-        if (id != comment.id) return false;
-        if (text != null ? !text.equals(comment.text) : comment.text != null) return false;
-        if (creationDate != null ? !creationDate.equals(comment.creationDate) : comment.creationDate != null)
-            return false;
-
-        return true;
+        return id == comment.id &&
+                Objects.equals(text, comment.text) &&
+                Objects.equals(creationDate, comment.creationDate);
     }
 
     @Override
     public int hashCode() {
-        int result = (int) (id ^ (id >>> 32));
-        result = 31 * result + (text != null ? text.hashCode() : 0);
-        result = 31 * result + (creationDate != null ? creationDate.hashCode() : 0);
-        return result;
+        return Objects.hash(id, text, creationDate);
     }
 
     @ManyToOne
@@ -71,5 +66,25 @@ public class Comment {
 
     public void setAnswerByAnswerId(Answer answerByAnswerId) {
         this.answerByAnswerId = answerByAnswerId;
+    }
+
+    @Basic
+    @Column(name = "Status_ID", nullable = false)
+    public short getStatusId() {
+        return statusId;
+    }
+
+    public void setStatusId(short statusId) {
+        this.statusId = statusId;
+    }
+
+    @Basic
+    @Column(name = "User_ID", nullable = false)
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 }
