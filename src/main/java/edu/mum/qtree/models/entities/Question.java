@@ -1,4 +1,4 @@
-package edu.mum.qtree.models;
+package edu.mum.qtree.models.entities;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -12,7 +12,6 @@ public class Question {
     private Collection<Answer> answers;
     private TextStatus textStatus;
     private User user;
-    private Collection<QuestionTags> questionTags;
 
     @Id
     @Column(name = "ID", nullable = false)
@@ -96,12 +95,6 @@ public class Question {
         this.user = user;
     }
 
-    @OneToMany(mappedBy = "question")
-    public Collection<QuestionTags> getQuestionTags() {
-        return questionTags;
-    }
 
-    public void setQuestionTags(Collection<QuestionTags> questionTags) {
-        this.questionTags = questionTags;
-    }
+
 }

@@ -1,4 +1,4 @@
-package edu.mum.qtree.models;
+package edu.mum.qtree.models.entities;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -7,7 +7,6 @@ import java.util.Collection;
 public class Tag {
     private int id;
     private String name;
-    private Collection<QuestionTags> questionTags;
 
     @Id
     @Column(name = "ID", nullable = false)
@@ -47,14 +46,5 @@ public class Tag {
         int result = id;
         result = 31 * result + (name != null ? name.hashCode() : 0);
         return result;
-    }
-
-    @OneToMany(mappedBy = "tag")
-    public Collection<QuestionTags> getQuestionTags() {
-        return questionTags;
-    }
-
-    public void setQuestionTags(Collection<QuestionTags> questionTags) {
-        this.questionTags = questionTags;
     }
 }
