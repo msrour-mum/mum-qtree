@@ -1,7 +1,7 @@
 package edu.mum.qtree.services;
 
 import edu.mum.qtree.dao.CommentRepository;
-import edu.mum.qtree.models.Comment;
+import edu.mum.qtree.models.entities.Comment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

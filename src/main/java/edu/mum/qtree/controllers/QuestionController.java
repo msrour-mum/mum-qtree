@@ -1,6 +1,6 @@
 package edu.mum.qtree.controllers;
 
-import edu.mum.qtree.models.Question;
+import edu.mum.qtree.models.entities.Question;
 import edu.mum.qtree.services.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

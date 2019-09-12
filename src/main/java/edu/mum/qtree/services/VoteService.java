@@ -1,7 +1,7 @@
 package edu.mum.qtree.services;
 
 import edu.mum.qtree.dao.VoteRepository;
-import edu.mum.qtree.models.Vote;
+import edu.mum.qtree.models.entities.Vote;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

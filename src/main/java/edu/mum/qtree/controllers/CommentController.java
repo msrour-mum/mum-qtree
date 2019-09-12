@@ -1,6 +1,6 @@
 package edu.mum.qtree.controllers;
 
-import edu.mum.qtree.models.Comment;
+import edu.mum.qtree.models.entities.Comment;
 import edu.mum.qtree.services.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

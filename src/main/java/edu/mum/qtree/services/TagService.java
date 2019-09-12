@@ -1,7 +1,7 @@
 package edu.mum.qtree.services;
 
 import edu.mum.qtree.dao.TagRepository;
-import edu.mum.qtree.models.Tag;
+import edu.mum.qtree.models.entities.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

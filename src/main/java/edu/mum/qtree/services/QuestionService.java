@@ -2,7 +2,7 @@ package edu.mum.qtree.services;
 
 import edu.mum.qtree.dao.QuestionRepository;
 
-import edu.mum.qtree.models.Question;
+import edu.mum.qtree.models.entities.Question;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
