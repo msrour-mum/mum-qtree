@@ -1,14 +1,14 @@
-package edu.mum.qtree.models;
+package edu.mum.qtree.models.entities;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
-public class Community {
+@Table(name = "user_role", schema = "qtreedb", catalog = "")
+public class UserRole {
     private int id;
     private String name;
+    private Collection<User> users;
 
     @Id
     @Column(name = "ID", nullable = false)
@@ -21,7 +21,7 @@ public class Community {
     }
 
     @Basic
-    @Column(name = "name", nullable = false, length = 50)
+    @Column(name = "Name", nullable = false, length = 45)
     public String getName() {
         return name;
     }
@@ -35,10 +35,10 @@ public class Community {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Community community = (Community) o;
+        UserRole userRole = (UserRole) o;
 
-        if (id != community.id) return false;
-        if (name != null ? !name.equals(community.name) : community.name != null) return false;
+        if (id != userRole.id) return false;
+        if (name != null ? !name.equals(userRole.name) : userRole.name != null) return false;
 
         return true;
     }
@@ -48,5 +48,14 @@ public class Community {
         int result = id;
         result = 31 * result + (name != null ? name.hashCode() : 0);
         return result;
+    }
+
+    @OneToMany(mappedBy = "userRole")
+    public Collection<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Collection<User> users) {
+        this.users = users;
     }
 }

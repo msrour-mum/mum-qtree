@@ -1,14 +1,14 @@
-package edu.mum.qtree.models;
+package edu.mum.qtree.models.entities;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
 public class Company {
     private int id;
     private String name;
+    private Collection<CompanyProfile> companyProfiles;
+    private Collection<Job> jobs;
 
     @Id
     @Column(name = "ID", nullable = false)
@@ -48,5 +48,23 @@ public class Company {
         int result = id;
         result = 31 * result + (name != null ? name.hashCode() : 0);
         return result;
+    }
+
+    @OneToMany(mappedBy = "company")
+    public Collection<CompanyProfile> getCompanyProfiles() {
+        return companyProfiles;
+    }
+
+    public void setCompanyProfiles(Collection<CompanyProfile> companyProfiles) {
+        this.companyProfiles = companyProfiles;
+    }
+
+    @OneToMany(mappedBy = "company")
+    public Collection<Job> getJobs() {
+        return jobs;
+    }
+
+    public void setJobs(Collection<Job> jobs) {
+        this.jobs = jobs;
     }
 }

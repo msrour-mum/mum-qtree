@@ -1,10 +1,8 @@
-package edu.mum.qtree.models;
+package edu.mum.qtree.models.entities;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Collection;
 
 @Entity
 public class User {
@@ -15,6 +13,13 @@ public class User {
     private byte isEnabled;
     private Timestamp createdOn;
     private Timestamp modifiedOn;
+    private Collection<Answer> answers;
+    private Collection<Comment> comments;
+    private Collection<Question> questions;
+    private UserRole userRole;
+    private Collection<UserCommunity> userCommunities;
+    private Collection<UserJobs> userJobs;
+    private Collection<Vote> votes;
 
     @Id
     @Column(name = "ID", nullable = false)
@@ -114,5 +119,69 @@ public class User {
         result = 31 * result + (createdOn != null ? createdOn.hashCode() : 0);
         result = 31 * result + (modifiedOn != null ? modifiedOn.hashCode() : 0);
         return result;
+    }
+
+    @OneToMany(mappedBy = "user")
+    public Collection<Answer> getAnswers() {
+        return answers;
+    }
+
+    public void setAnswers(Collection<Answer> answers) {
+        this.answers = answers;
+    }
+
+    @OneToMany(mappedBy = "user")
+    public Collection<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(Collection<Comment> comments) {
+        this.comments = comments;
+    }
+
+    @OneToMany(mappedBy = "user")
+    public Collection<Question> getQuestions() {
+        return questions;
+    }
+
+    public void setQuestions(Collection<Question> questions) {
+        this.questions = questions;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "User_Role_ID", referencedColumnName = "ID", nullable = false)
+    public UserRole getUserRole() {
+        return userRole;
+    }
+
+    public void setUserRole(UserRole userRole) {
+        this.userRole = userRole;
+    }
+
+    @OneToMany(mappedBy = "user")
+    public Collection<UserCommunity> getUserCommunities() {
+        return userCommunities;
+    }
+
+    public void setUserCommunities(Collection<UserCommunity> userCommunities) {
+        this.userCommunities = userCommunities;
+    }
+
+    @OneToMany(mappedBy = "user")
+    public Collection<UserJobs> getUserJobs() {
+        return userJobs;
+    }
+
+    public void setUserJobs(Collection<UserJobs> userJobs) {
+        this.userJobs = userJobs;
+    }
+
+    @OneToMany(mappedBy = "user")
+    public Collection<Vote> getVotes() {
+        return votes;
+    }
+
+    public void setVotes(Collection<Vote> votes) {
+        this.votes = votes;
     }
 }

@@ -1,4 +1,4 @@
-package edu.mum.qtree.models;
+package edu.mum.qtree.models.entities;
 
 import javax.persistence.*;
 
@@ -6,8 +6,8 @@ import javax.persistence.*;
 public class Vote {
     private int id;
     private boolean like;
-    private User userByUserId;
-    private Answer answerByAnswerId;
+    private User user;
+    private Answer answer;
 
     @Id
     @Column(name = "ID", nullable = false)
@@ -51,21 +51,21 @@ public class Vote {
 
     @ManyToOne
     @JoinColumn(name = "user_ID", referencedColumnName = "ID", nullable = false)
-    public User getUserByUserId() {
-        return userByUserId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserByUserId(User userByUserId) {
-        this.userByUserId = userByUserId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @ManyToOne
     @JoinColumn(name = "answer_ID", referencedColumnName = "ID", nullable = false)
-    public Answer getAnswerByAnswerId() {
-        return answerByAnswerId;
+    public Answer getAnswer() {
+        return answer;
     }
 
-    public void setAnswerByAnswerId(Answer answerByAnswerId) {
-        this.answerByAnswerId = answerByAnswerId;
+    public void setAnswer(Answer answer) {
+        this.answer = answer;
     }
 }

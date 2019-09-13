@@ -1,4 +1,4 @@
-package edu.mum.qtree.models;
+package edu.mum.qtree.models.entities;
 
 import javax.persistence.*;
 
@@ -7,7 +7,8 @@ import javax.persistence.*;
 public class CompanyProfile {
     private int id;
     private String tagValue;
-    private Company companyByCompanyId;
+    private Company company;
+    private CompanyProfileType companyProfileType;
 
     @Id
     @Column(name = "ID", nullable = false)
@@ -51,11 +52,21 @@ public class CompanyProfile {
 
     @ManyToOne
     @JoinColumn(name = "company_ID", referencedColumnName = "ID", nullable = false)
-    public Company getCompanyByCompanyId() {
-        return companyByCompanyId;
+    public Company getCompany() {
+        return company;
     }
 
-    public void setCompanyByCompanyId(Company companyByCompanyId) {
-        this.companyByCompanyId = companyByCompanyId;
+    public void setCompany(Company company) {
+        this.company = company;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "profile_type_ID", referencedColumnName = "Id", nullable = false)
+    public CompanyProfileType getCompanyProfileType() {
+        return companyProfileType;
+    }
+
+    public void setCompanyProfileType(CompanyProfileType companyProfileType) {
+        this.companyProfileType = companyProfileType;
     }
 }

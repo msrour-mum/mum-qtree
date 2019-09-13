@@ -1,10 +1,10 @@
-package edu.mum.qtree.models;
+package edu.mum.qtree.models.entities;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
-@Table(name = "user_role", schema = "qtreedb", catalog = "")
-public class UserRole {
+public class Tag {
     private int id;
     private String name;
 
@@ -19,7 +19,7 @@ public class UserRole {
     }
 
     @Basic
-    @Column(name = "Name", nullable = false, length = 45)
+    @Column(name = "name", nullable = false, length = 50)
     public String getName() {
         return name;
     }
@@ -33,10 +33,10 @@ public class UserRole {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        UserRole userRole = (UserRole) o;
+        Tag tag = (Tag) o;
 
-        if (id != userRole.id) return false;
-        if (name != null ? !name.equals(userRole.name) : userRole.name != null) return false;
+        if (id != tag.id) return false;
+        if (name != null ? !name.equals(tag.name) : tag.name != null) return false;
 
         return true;
     }

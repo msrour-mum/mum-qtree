@@ -1,7 +1,7 @@
 package edu.mum.qtree.services;
 
 import edu.mum.qtree.dao.UserRepository;
-import edu.mum.qtree.models.User;
+import edu.mum.qtree.models.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

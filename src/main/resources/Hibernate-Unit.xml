@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+    "-//Hibernate/Hibernate Configuration DTD//EN"
+    "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="connection.url">jdbc:mysql://qtreedbserver.mysql.database.azure.com:3306/qtreedb</property>
+    <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+      <mapping class="edu.mum.qtree.models.entities.Answer"/>
+      <mapping class="edu.mum.qtree.models.entities.Comment"/>
+      <mapping class="edu.mum.qtree.models.entities.Community"/>
+      <mapping class="edu.mum.qtree.models.entities.Company"/>
+      <mapping class="edu.mum.qtree.models.entities.CompanyProfile"/>
+      <mapping class="edu.mum.qtree.models.entities.CompanyProfileType"/>
+      <mapping class="edu.mum.qtree.models.entities.Job"/>
+      <mapping class="edu.mum.qtree.models.entities.Question"/>
+      <mapping class="edu.mum.qtree.models.entities.QuestionTags"/>
+      <mapping class="edu.mum.qtree.models.entities.Tag"/>
+      <mapping class="edu.mum.qtree.models.entities.TextStatus"/>
+      <mapping class="edu.mum.qtree.models.entities.User"/>
+      <mapping class="edu.mum.qtree.models.entities.UserCommunity"/>
+      <mapping class="edu.mum.qtree.models.entities.UserJobs"/>
+      <mapping class="edu.mum.qtree.models.entities.UserRole"/>
+      <mapping class="edu.mum.qtree.models.entities.Vote"/>
+    <mapping resource="edu/mum/qtree/models/Answer.hbm.xml"/>
+    <mapping resource="edu/mum/qtree/models/Comment.hbm.xml"/>
+    <mapping resource="edu/mum/qtree/models/Community.hbm.xml"/>
+    <mapping resource="edu/mum/qtree/models/Company.hbm.xml"/>
+    <mapping resource="edu/mum/qtree/models/CompanyProfile.hbm.xml"/>
+    <mapping resource="edu/mum/qtree/models/CompanyProfileType.hbm.xml"/>
+    <mapping resource="edu/mum/qtree/models/Job.hbm.xml"/>
+    <mapping resource="edu/mum/qtree/models/Question.hbm.xml"/>
+    <mapping resource="edu/mum/qtree/models/QuestionTags.hbm.xml"/>
+    <mapping resource="edu/mum/qtree/models/Tag.hbm.xml"/>
+    <mapping resource="edu/mum/qtree/models/TextStatus.hbm.xml"/>
+    <mapping resource="edu/mum/qtree/models/User.hbm.xml"/>
+    <mapping resource="edu/mum/qtree/models/UserCommunity.hbm.xml"/>
+    <mapping resource="edu/mum/qtree/models/UserJobs.hbm.xml"/>
+    <mapping resource="edu/mum/qtree/models/UserRole.hbm.xml"/>
+    <mapping resource="edu/mum/qtree/models/Vote.hbm.xml"/>
+      <mapping class="edu.mum.qtree.models.entities.QuestionTags"/>
+      <!-- <property name="connection.username"/> -->
+    <!-- <property name="connection.password"/> -->
+
+    <!-- DB schema will be updated if needed -->
+    <!-- <property name="hibernate.hbm2ddl.auto">update</property> -->
+  </session-factory>
+</hibernate-configuration>

@@ -1,15 +1,17 @@
-package edu.mum.qtree.models;
+package edu.mum.qtree.models.entities;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
-public class Jobs {
+public class Job {
     private int id;
     private String jobTitle;
     private String jobDescritpion;
     private String jobType;
     private String jobRole;
-    private Company companyByCompanyId;
+    private Company company;
+    private Collection<UserJobs> userJobs;
 
     @Id
     @Column(name = "ID", nullable = false)
@@ -66,14 +68,14 @@ public class Jobs {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Jobs jobs = (Jobs) o;
+        Job job = (Job) o;
 
-        if (id != jobs.id) return false;
-        if (jobTitle != null ? !jobTitle.equals(jobs.jobTitle) : jobs.jobTitle != null) return false;
-        if (jobDescritpion != null ? !jobDescritpion.equals(jobs.jobDescritpion) : jobs.jobDescritpion != null)
+        if (id != job.id) return false;
+        if (jobTitle != null ? !jobTitle.equals(job.jobTitle) : job.jobTitle != null) return false;
+        if (jobDescritpion != null ? !jobDescritpion.equals(job.jobDescritpion) : job.jobDescritpion != null)
             return false;
-        if (jobType != null ? !jobType.equals(jobs.jobType) : jobs.jobType != null) return false;
-        if (jobRole != null ? !jobRole.equals(jobs.jobRole) : jobs.jobRole != null) return false;
+        if (jobType != null ? !jobType.equals(job.jobType) : job.jobType != null) return false;
+        if (jobRole != null ? !jobRole.equals(job.jobRole) : job.jobRole != null) return false;
 
         return true;
     }
@@ -90,11 +92,20 @@ public class Jobs {
 
     @ManyToOne
     @JoinColumn(name = "Company_ID", referencedColumnName = "ID", nullable = false)
-    public Company getCompanyByCompanyId() {
-        return companyByCompanyId;
+    public Company getCompany() {
+        return company;
     }
 
-    public void setCompanyByCompanyId(Company companyByCompanyId) {
-        this.companyByCompanyId = companyByCompanyId;
+    public void setCompany(Company company) {
+        this.company = company;
+    }
+
+    @OneToMany(mappedBy = "job")
+    public Collection<UserJobs> getUserJobs() {
+        return userJobs;
+    }
+
+    public void setUserJobs(Collection<UserJobs> userJobs) {
+        this.userJobs = userJobs;
     }
 }

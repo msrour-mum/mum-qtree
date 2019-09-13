@@ -1,4 +1,4 @@
-package edu.mum.qtree.models;
+package edu.mum.qtree.models.entities;
 
 import javax.persistence.*;
 
@@ -6,8 +6,8 @@ import javax.persistence.*;
 @Table(name = "user_community", schema = "qtreedb", catalog = "")
 public class UserCommunity {
     private int id;
-    private Community communityByCommunityId;
-    private User userByUserId;
+    private Community community;
+    private User user;
 
     @Id
     @Column(name = "ID", nullable = false)
@@ -38,21 +38,21 @@ public class UserCommunity {
 
     @ManyToOne
     @JoinColumn(name = "Community_ID", referencedColumnName = "ID", nullable = false)
-    public Community getCommunityByCommunityId() {
-        return communityByCommunityId;
+    public Community getCommunity() {
+        return community;
     }
 
-    public void setCommunityByCommunityId(Community communityByCommunityId) {
-        this.communityByCommunityId = communityByCommunityId;
+    public void setCommunity(Community community) {
+        this.community = community;
     }
 
     @ManyToOne
     @JoinColumn(name = "User_ID", referencedColumnName = "ID", nullable = false)
-    public User getUserByUserId() {
-        return userByUserId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserByUserId(User userByUserId) {
-        this.userByUserId = userByUserId;
+    public void setUser(User user) {
+        this.user = user;
     }
 }

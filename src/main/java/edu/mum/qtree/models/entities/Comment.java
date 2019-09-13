@@ -1,4 +1,4 @@
-package edu.mum.qtree.models;
+package edu.mum.qtree.models.entities;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -8,7 +8,9 @@ public class Comment {
     private long id;
     private String text;
     private Timestamp creationDate;
-    private Answer answerByAnswerId;
+    private TextStatus textStatus;
+    private User user;
+    private Answer answers;
 
     @Id
     @Column(name = "ID", nullable = false)
@@ -64,12 +66,32 @@ public class Comment {
     }
 
     @ManyToOne
-    @JoinColumn(name = "answer_ID", referencedColumnName = "ID", nullable = false)
-    public Answer getAnswerByAnswerId() {
-        return answerByAnswerId;
+    @JoinColumn(name = "Status_ID", referencedColumnName = "ID", nullable = false)
+    public TextStatus getTextStatus() {
+        return textStatus;
     }
 
-    public void setAnswerByAnswerId(Answer answerByAnswerId) {
-        this.answerByAnswerId = answerByAnswerId;
+    public void setTextStatus(TextStatus textStatus) {
+        this.textStatus = textStatus;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "User_ID", referencedColumnName = "ID", nullable = false)
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "answer_ID", referencedColumnName = "ID", nullable = false)
+    public Answer getAnswers() {
+        return answers;
+    }
+
+    public void setAnswers(Answer answers) {
+        this.answers = answers;
     }
 }

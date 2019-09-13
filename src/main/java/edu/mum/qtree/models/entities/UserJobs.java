@@ -1,4 +1,4 @@
-package edu.mum.qtree.models;
+package edu.mum.qtree.models.entities;
 
 import javax.persistence.*;
 
@@ -9,8 +9,8 @@ public class UserJobs {
     private byte isApplied;
     private byte isSaved;
     private int rate;
-    private Jobs jobsByJobId;
-    private User userByUserId;
+    private Job job;
+    private User user;
 
     @Id
     @Column(name = "ID", nullable = false)
@@ -78,21 +78,21 @@ public class UserJobs {
 
     @ManyToOne
     @JoinColumn(name = "Job_ID", referencedColumnName = "ID", nullable = false)
-    public Jobs getJobsByJobId() {
-        return jobsByJobId;
+    public Job getJob() {
+        return job;
     }
 
-    public void setJobsByJobId(Jobs jobsByJobId) {
-        this.jobsByJobId = jobsByJobId;
+    public void setJob(Job job) {
+        this.job = job;
     }
 
     @ManyToOne
     @JoinColumn(name = "User_ID", referencedColumnName = "ID", nullable = false)
-    public User getUserByUserId() {
-        return userByUserId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserByUserId(User userByUserId) {
-        this.userByUserId = userByUserId;
+    public void setUser(User user) {
+        this.user = user;
     }
 }

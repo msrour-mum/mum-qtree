@@ -1,15 +1,17 @@
-package edu.mum.qtree.models;
+package edu.mum.qtree.models.entities;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
-@Table(name = "text_status", schema = "qtreedb", catalog = "")
-public class TextStatus {
+@Table(name = "company_profile_type", schema = "qtreedb", catalog = "")
+public class CompanyProfileType {
     private short id;
     private String name;
+    private Collection<CompanyProfile> companyProfiles;
 
     @Id
-    @Column(name = "ID", nullable = false)
+    @Column(name = "Id", nullable = false)
     public short getId() {
         return id;
     }
@@ -19,7 +21,7 @@ public class TextStatus {
     }
 
     @Basic
-    @Column(name = "name", nullable = false, length = 45)
+    @Column(name = "name", nullable = false, length = 50)
     public String getName() {
         return name;
     }
@@ -33,7 +35,7 @@ public class TextStatus {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        TextStatus that = (TextStatus) o;
+        CompanyProfileType that = (CompanyProfileType) o;
 
         if (id != that.id) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
@@ -46,5 +48,14 @@ public class TextStatus {
         int result = (int) id;
         result = 31 * result + (name != null ? name.hashCode() : 0);
         return result;
+    }
+
+    @OneToMany(mappedBy = "companyProfileType")
+    public Collection<CompanyProfile> getCompanyProfiles() {
+        return companyProfiles;
+    }
+
+    public void setCompanyProfiles(Collection<CompanyProfile> companyProfiles) {
+        this.companyProfiles = companyProfiles;
     }
 }

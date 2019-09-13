@@ -1,16 +1,19 @@
-package edu.mum.qtree.models;
+package edu.mum.qtree.models.entities;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Collection;
 
 @Entity
 public class Answer {
     private long id;
     private String text;
     private Timestamp creationDate;
+    private TextStatus textStatus;
+    private User user;
+    private Question question;
+    private Collection<Comment> comments;
+    private Collection<Vote> votes;
 
     @Id
     @Column(name = "ID", nullable = false)
@@ -63,5 +66,53 @@ public class Answer {
         result = 31 * result + (text != null ? text.hashCode() : 0);
         result = 31 * result + (creationDate != null ? creationDate.hashCode() : 0);
         return result;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "Status_ID", referencedColumnName = "ID", nullable = false)
+    public TextStatus getTextStatus() {
+        return textStatus;
+    }
+
+    public void setTextStatus(TextStatus textStatus) {
+        this.textStatus = textStatus;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "User_ID", referencedColumnName = "ID", nullable = false)
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "question_ID", referencedColumnName = "ID", nullable = false)
+    public Question getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(Question question) {
+        this.question = question;
+    }
+
+    @OneToMany(mappedBy = "answers")
+    public Collection<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(Collection<Comment> comments) {
+        this.comments = comments;
+    }
+
+    @OneToMany(mappedBy = "answer")
+    public Collection<Vote> getVotes() {
+        return votes;
+    }
+
+    public void setVotes(Collection<Vote> votes) {
+        this.votes = votes;
     }
 }

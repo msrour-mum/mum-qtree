@@ -1,7 +1,6 @@
 package edu.mum.qtree.dao;
 
-import edu.mum.qtree.models.User;
-import org.springframework.data.jpa.repository.JpaRepository;
+import edu.mum.qtree.models.entities.User;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
