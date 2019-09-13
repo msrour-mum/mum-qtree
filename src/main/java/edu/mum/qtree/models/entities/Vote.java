@@ -6,7 +6,13 @@ import javax.persistence.*;
 public class Vote {
     private int id;
     private boolean like;
+
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = User.class)
+    @JoinColumn(name = "User_ID", insertable = false, updatable = false)
     private User user;
+
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Answer.class)
+    @JoinColumn(name = "answer_ID", insertable = false, updatable = false)
     private Answer answer;
 
     @Id

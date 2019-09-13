@@ -100,6 +100,7 @@ public class Job {
         this.company = company;
     }
 
+
     @OneToMany(mappedBy = "job")
     public Collection<UserJobs> getUserJobs() {
         return userJobs;

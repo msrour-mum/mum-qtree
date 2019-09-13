@@ -1,6 +1,9 @@
 package edu.mum.qtree.controllers;
 
+import edu.mum.qtree.dto.dbUtility;
+import edu.mum.qtree.models.custom.ItemTextRequest;
 import edu.mum.qtree.models.entities.Answer;
+import edu.mum.qtree.models.entities.Question;
 import edu.mum.qtree.services.AnswerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -28,9 +31,16 @@ public class AnswerController
     }
 
     @PostMapping("/Answer")
-    public  void Add(@RequestBody Answer question)
+    public  void Add(@RequestBody ItemTextRequest request)
     {
-         service.Add(question);;
+        Answer ent=new Answer();
+        //question.setId(request.getId());
+        ent.setText(request.getText());
+        ent.setCreationDate(dbUtility.Now());
+        ent.setTextStatus(dbUtility.quickTextStatus(1));
+        ent.setUser(dbUtility.quickUser(request.getUserId()));
+        ent.setQuestion(dbUtility.quickQuestion(request.getParentId()));
+        service.Add(ent);;
     }
 
     @PutMapping ("/Answer")

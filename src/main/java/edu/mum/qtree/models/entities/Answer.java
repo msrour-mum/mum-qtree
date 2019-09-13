@@ -10,8 +10,17 @@ public class Answer {
     private String text;
     private Timestamp creationDate;
     private TextStatus textStatus;
+
+    //@NotNull
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = User.class)
+    @JoinColumn(name = "User_ID", insertable = false, updatable = false)
     private User user;
+
+
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Question.class)
+    @JoinColumn(name = "question_ID", insertable = false, updatable = false)
     private Question question;
+
     private Collection<Comment> comments;
     private Collection<Vote> votes;
 

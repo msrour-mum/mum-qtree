@@ -22,11 +22,11 @@ public class AnswerService {
     {
         rep.save(question);
     }
-    public void Delete(int id)
+    public void Delete(long id)
     {
         rep.deleteById(id);
     }
-    public Optional<Answer> SelectOne(int id)
+    public Optional<Answer> SelectOne(long id)
     {
         return rep.findById(id);
     }

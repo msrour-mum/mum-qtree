@@ -22,11 +22,11 @@ public class CommentService {
     {
         rep.save(item);
     }
-    public void Delete(int id)
+    public void Delete(long id)
     {
         rep.deleteById(id);
     }
-    public Optional<Comment> SelectOne(int id)
+    public Optional<Comment> SelectOne(long id)
     {
         return rep.findById(id);
     }
