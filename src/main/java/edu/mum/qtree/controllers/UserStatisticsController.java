@@ -1,7 +1,7 @@
 package edu.mum.qtree.controllers;
 
 import edu.mum.qtree.dto.TopUser;
-import edu.mum.qtree.services.StatisticsService;
+import edu.mum.qtree.services.UserStatisticsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserStatisticsController {
 
     @Autowired
-    private StatisticsService service;
+    private UserStatisticsService service;
 
     @GetMapping("/Statistics/TopReputatedUser")
     public TopUser getTopReputatedUser(){
