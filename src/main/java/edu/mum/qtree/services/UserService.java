@@ -16,18 +16,40 @@ public class UserService {
 
     public List<User> list()
     {
-        return (List<User>) userRepository.findAll();
+        return userRepository.findAll();
     }
 
-    public void Add(User user)
+    public User save(User user)
     {
-        userRepository.save(user);
+        return userRepository.saveAndFlush(user);
     }
 
     public Optional<User> getUser(int id)
     {
         return userRepository.findById(id);
 
+    }
+
+    public void deleteUser(int id)
+    {
+        User userToUpdate = getUser(id).get();
+
+        //ToDo:Check if this super admin, as super admin shouldn't be deleted
+
+        if(userToUpdate != null) {
+            userToUpdate.setIsEnabled((byte)0);
+            save(userToUpdate);
+        }
+    }
+
+    public void Enable(int id)
+    {
+        User userToUpdate = getUser(id).get();
+
+        if(userToUpdate != null) {
+            userToUpdate.setIsEnabled((byte)1);
+            save(userToUpdate);
+        }
     }
 
 }

@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-//@RequestMapping("/users")
+@RequestMapping("/users")
 public class UserController {
 
     @Autowired
@@ -17,23 +17,40 @@ public class UserController {
 
     //APIs
 
-    @GetMapping("/users")
+    @GetMapping()
     public List<User> listUsers()
     {
         return userService.list();
     }
 
-    @PostMapping("/users")
+    @PostMapping()
     public User addUser(@RequestBody User user)
     {
-        userService.Add(user);
-        return user;
+        return userService.save(user);
     }
 
-    @GetMapping("/users/{id}")
+    @PutMapping()
+    public User updateUser(@RequestBody User user)
+    {
+        return userService.save(user);
+    }
+
+    @GetMapping("/{id}")
     public Optional<User> getUser(@PathVariable("id") int id)
     {
         return userService.getUser(id);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteUser(@PathVariable("id") int id)
+    {
+        userService.deleteUser(id);
+    }
+
+    @PatchMapping("/{id}")
+    public void enableUser(@PathVariable("id") int id)
+    {
+        userService.Enable(id);
     }
 
 }
