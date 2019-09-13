@@ -1,8 +1,12 @@
 package edu.mum.qtree.models.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Collection;
+import java.util.Date;
 
 @Entity
 public class User {
@@ -11,8 +15,8 @@ public class User {
     private String name;
     private String password;
     private byte isEnabled;
-    private Timestamp createdOn;
-    private Timestamp modifiedOn;
+    private Date createdOn;
+    private Date modifiedOn;
     private Collection<Answer> answers;
     private Collection<Comment> comments;
     private Collection<Question> questions;
@@ -73,21 +77,21 @@ public class User {
 
     @Basic
     @Column(name = "created_on", nullable = false)
-    public Timestamp getCreatedOn() {
+    public Date getCreatedOn() {
         return createdOn;
     }
 
-    public void setCreatedOn(Timestamp createdOn) {
+    public void setCreatedOn(Date createdOn) {
         this.createdOn = createdOn;
     }
 
     @Basic
     @Column(name = "modified_on", nullable = false)
-    public Timestamp getModifiedOn() {
+    public Date getModifiedOn() {
         return modifiedOn;
     }
 
-    public void setModifiedOn(Timestamp modifiedOn) {
+    public void setModifiedOn(Date modifiedOn) {
         this.modifiedOn = modifiedOn;
     }
 
@@ -121,7 +125,7 @@ public class User {
         return result;
     }
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     public Collection<Answer> getAnswers() {
         return answers;
     }
@@ -130,7 +134,7 @@ public class User {
         this.answers = answers;
     }
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     public Collection<Comment> getComments() {
         return comments;
     }
@@ -139,7 +143,7 @@ public class User {
         this.comments = comments;
     }
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     public Collection<Question> getQuestions() {
         return questions;
     }
@@ -158,7 +162,7 @@ public class User {
         this.userRole = userRole;
     }
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     public Collection<UserCommunity> getUserCommunities() {
         return userCommunities;
     }
@@ -167,7 +171,7 @@ public class User {
         this.userCommunities = userCommunities;
     }
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     public Collection<UserJobs> getUserJobs() {
         return userJobs;
     }
@@ -176,7 +180,7 @@ public class User {
         this.userJobs = userJobs;
     }
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     public Collection<Vote> getVotes() {
         return votes;
     }
