@@ -1,15 +1,19 @@
 package edu.mum.qtree.models.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
+
+import static java.util.stream.Collectors.toList;
 
 @Entity
-public class User {
+public class User implements UserDetails {
     private int id;
     private String email;
     private String name;
@@ -24,6 +28,8 @@ public class User {
     private Collection<UserCommunity> userCommunities;
     private Collection<UserJobs> userJobs;
     private Collection<Vote> votes;
+
+    private List<String> roles = new ArrayList<>();
 
     @Id
     @Column(name = "ID", nullable = false)
@@ -55,10 +61,48 @@ public class User {
         this.name = name;
     }
 
+    @Override
+    @Transient
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+
+        this.roles.add(getUserRole().getName());
+        return this.roles.stream().map(SimpleGrantedAuthority::new).collect(toList());
+    }
+
     @Basic
     @Column(name = "Password", nullable = false, length = 250)
     public String getPassword() {
         return password;
+    }
+
+    @Override
+    @Transient
+    public String getUsername() {
+        return getEmail();
+    }
+
+    @Override
+    @Transient
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    @Transient
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    @Transient
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    @Transient
+    public boolean isEnabled() {
+        return  true;
     }
 
     public void setPassword(String password) {

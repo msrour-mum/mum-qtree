@@ -26,23 +26,6 @@ public class UserController {
         return userService.list();
     }
 
-    @PostMapping()
-    public User addUser(@RequestBody UserAddDto dto)
-    {
-        User user = new User();
-
-        user.setId(dto.getId());
-        user.setEmail(dto.getEmail());
-        user.setName(dto.getName());
-        user.setPassword(dto.getPassword());
-        user.setIsEnabled(dto.getIsEnabled());
-        user.setUserRole(new UserRole(dto.getRoleId()));
-        user.setCreatedOn(new Date());
-        user.setModifiedOn(new Date());
-
-        return userService.save(user);
-    }
-
     @PutMapping()
     public User updateUser(@RequestBody UserUpdateDto dto)
     {

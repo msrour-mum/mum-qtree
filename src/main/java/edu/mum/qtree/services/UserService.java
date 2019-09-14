@@ -3,6 +3,7 @@ package edu.mum.qtree.services;
 import edu.mum.qtree.dao.UserRepository;
 import edu.mum.qtree.models.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,11 +15,19 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
     public List<User> list()
     {
         return userRepository.findAll();
     }
 
+    public User signUp(User user)
+    {
+        user.setPassword(this.passwordEncoder.encode(user.getPassword()));
+        return userRepository.saveAndFlush(user);
+    }
     public User save(User user)
     {
         return userRepository.saveAndFlush(user);
@@ -27,6 +36,12 @@ public class UserService {
     public Optional<User> getUser(int id)
     {
         return userRepository.findById(id);
+
+    }
+
+    public Optional<User> getUserByUserName(String email)
+    {
+        return userRepository.findByEmail(email);
 
     }
 
