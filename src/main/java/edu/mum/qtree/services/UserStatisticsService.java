@@ -8,43 +8,55 @@ import edu.mum.qtree.models.entities.Vote;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 @Service
 public class UserStatisticsService {
 
     @Autowired
     private UserService userService ;
 
-    public TopUser getTopReputatedUser(){
+    public List<TopUser> getTopReputatedUser(){
+        List<TopUser> users = new ArrayList<>();
         int reputation = 0;
-        User user = new User() ;
         for (User u : userService.list()){
-            if (getusersReputationByAnswers(u) > reputation){
-                reputation = getusersReputationByAnswers(u) ;
-                user = u ;
-            }
+            reputation = getUserReputationByAnswers(u);
+            users.add(new TopUser(u.getId(),u.getName(),reputation));
         }
-        return new TopUser(user.getId(),user.getName(),reputation);
+        Collections.sort(users);
+        Collections.reverse(users);
+        List<TopUser> updatedUsers = new ArrayList<>();
+            for(int i =0 ; i < 5 && i<users.size() ;i++){
+                updatedUsers.add(users.get(i));
+            }
+        return updatedUsers;
     }
-    public TopUser getTopActiveUser(){
-        int reputation = 0 ;
-        User user = new User();
-        for(User u : userService.list()){
-            if((getUsersReputationsByQuestions(u))+getusersReputationByAnswers(u)> reputation){
-                user = u ;
-                reputation = getusersReputationByAnswers(u)+getUsersReputationsByQuestions(u) ;
-            }
+    public List<TopUser> getTopActiveUser(){
+        List<TopUser> users = new ArrayList<>();
+        int reputation = 0;
+        for (User u : userService.list()){
+            reputation = getUserReputationByAnswers(u) + getUserReputationsByQuestions(u);
+            users.add(new TopUser(u.getId(),u.getName(),reputation));
         }
-        return new TopUser(user.getId(),user.getName(),reputation);
+        Collections.sort(users);
+        Collections.reverse(users);
+        List<TopUser> updatedUsers = new ArrayList<>();
+        for(int i =0 ; i < 5 && i<users.size() ;i++){
+            updatedUsers.add(users.get(i));
+        }
+        return updatedUsers;
     }
 
-    private int getUsersReputationsByQuestions(User user){
+    private int getUserReputationsByQuestions(User user){
         int numOfQuestion = 0;
         for(Question q : user.getQuestions()){
             if(q.getAnswers().size() >= 3) numOfQuestion ++ ;
         }
         return  ((numOfQuestion / 3)*10) ;
     }
-    private int getusersReputationByAnswers(User user){
+    private int getUserReputationByAnswers(User user){
         int numOfAnswers =0 ;
         for (Answer a: user.getAnswers()){
             int positiveVotes =0 ;
