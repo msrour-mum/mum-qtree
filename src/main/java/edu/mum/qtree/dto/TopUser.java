@@ -1,6 +1,6 @@
 package edu.mum.qtree.dto;
 
-public class TopUser {
+public class TopUser implements Comparable<TopUser>{
     private int id ;
     private String name ;
     private int reputation ;
@@ -21,5 +21,10 @@ public class TopUser {
 
     public int getReputation() {
         return reputation;
+    }
+
+    @Override
+    public int compareTo(TopUser o) {
+        return o.reputation - this.reputation ;
     }
 }

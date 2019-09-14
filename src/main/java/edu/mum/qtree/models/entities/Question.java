@@ -1,17 +1,30 @@
 package edu.mum.qtree.models.entities;
 
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Indexed;
+import org.hibernate.search.annotations.TermVector;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Collection;
 
 @Entity
+@Indexed
 public class Question {
     private long id;
+    @Field(termVector = TermVector.YES)
     private String text;
     private Timestamp creationDate;
     private Collection<Answer> answers;
+
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = TextStatus.class)
+    @JoinColumn(name = "Status_ID", insertable = false, updatable = false)
     private TextStatus textStatus;
+
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = User.class)
+    @JoinColumn(name = "User_ID", insertable = false, updatable = false)
     private User user;
+
 
     @Id
     @Column(name = "ID", nullable = false)

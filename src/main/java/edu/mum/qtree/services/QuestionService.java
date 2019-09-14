@@ -19,17 +19,18 @@ public class QuestionService {
         rep.save(question);
     }
 
-    public void Update(Question question)
+    public void Update(long id, String txt)
     {
-        rep.save(question);
+        //rep.save(question);
+        rep.UpdateData(id,txt);
     }
 
-    public void Delete(int id)
+    public void Delete(long id)
     {
         rep.deleteById(id);
     }
 
-    public Optional<Question> SelectOne(int id)
+    public Optional<Question> SelectOne(long id)
     {
         return rep.findById(id);
     }
@@ -37,4 +38,10 @@ public class QuestionService {
     {
         return (List<Question>) rep.findAll();
     }
+
+
+    /*public List<Question> Search(String txt)
+    {
+        return (List<Question>) rep.serachQuestion(txt);
+    }*/
 }

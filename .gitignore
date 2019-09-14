@@ -70,3 +70,11 @@ transaction-logs
 secrets.yml
 .gradletasknamecache
 .sts4-cache
+
+edu.mum.qtree.models.custom.ItemSearchResult/segments_1
+
+edu.mum.qtree.models.custom.ItemSearchResult/write.lock
+
+edu.mum.qtree.models.entities.Question/segments_1
+
+edu.mum.qtree.models.entities.Question/write.lock
