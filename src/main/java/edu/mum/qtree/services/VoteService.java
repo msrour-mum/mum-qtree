@@ -22,11 +22,11 @@ public class VoteService {
     {
         rep.save(item);
     }
-    public void Delete(int id)
+    public void Delete(long id)
     {
         rep.deleteById(id);
     }
-    public Optional<Vote> SelectOne(int id)
+    public Optional<Vote> SelectOne(long id)
     {
         return rep.findById(id);
     }

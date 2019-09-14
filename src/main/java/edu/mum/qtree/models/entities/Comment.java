@@ -9,7 +9,14 @@ public class Comment {
     private String text;
     private Timestamp creationDate;
     private TextStatus textStatus;
+
+
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = User.class)
+    @JoinColumn(name = "User_ID", insertable = false, updatable = false)
     private User user;
+
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Answer.class)
+    @JoinColumn(name = "answer_ID", insertable = false, updatable = false)
     private Answer answers;
 
     @Id

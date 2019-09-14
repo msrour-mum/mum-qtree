@@ -1,5 +1,7 @@
 package edu.mum.qtree.controllers;
 
+import edu.mum.qtree.dto.dbUtility;
+import edu.mum.qtree.models.custom.ItemTextRequest;
 import edu.mum.qtree.models.entities.Comment;
 import edu.mum.qtree.services.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,9 +30,16 @@ public class CommentController
     }
 
     @PostMapping("/Comment")
-    public  void Add(@RequestBody Comment question)
+    public  void Add(@RequestBody ItemTextRequest request)
     {
-         service.Add(question);;
+        Comment ent=new Comment();
+        //question.setId(request.getId());
+        ent.setText(request.getText());
+        ent.setCreationDate(dbUtility.Now());
+        ent.setTextStatus(dbUtility.quickTextStatus(1));
+        ent.setUser(dbUtility.quickUser(request.getUserId()));
+        ent.setAnswers(dbUtility.quickAnswer(request.getParentId()));
+        service.Add(ent);;
     }
 
     @PutMapping ("/Comment")
