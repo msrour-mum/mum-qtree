@@ -1,6 +1,6 @@
 package edu.mum.qtree.controllers;
-import edu.mum.qtree.dto.UserAddDto;
 import edu.mum.qtree.dto.UserUpdateDto;
+import edu.mum.qtree.exceptions.BusinessException;
 import edu.mum.qtree.models.entities.User;
 import edu.mum.qtree.models.entities.UserRole;
 import edu.mum.qtree.services.UserService;
@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/users")
@@ -27,9 +26,8 @@ public class UserController {
     }
 
     @PutMapping()
-    public User updateUser(@RequestBody UserUpdateDto dto)
-    {
-        User user = userService.getUser(dto.getId()).get();
+    public User updateUser(@RequestBody UserUpdateDto dto) throws BusinessException {
+        User user = userService.getUser(dto.getId());
 
         user.setId(dto.getId());
         user.setName(dto.getName());
@@ -41,20 +39,17 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public Optional<User> getUser(@PathVariable("id") int id)
-    {
+    public User getUser(@PathVariable("id") int id) throws BusinessException {
         return userService.getUser(id);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteUser(@PathVariable("id") int id)
-    {
+    public void deleteUser(@PathVariable("id") int id) throws BusinessException {
         userService.deleteUser(id);
     }
 
     @PatchMapping("/{id}")
-    public void enableUser(@PathVariable("id") int id)
-    {
+    public void enableUser(@PathVariable("id") int id) throws BusinessException {
         userService.Enable(id);
     }
 

@@ -1,6 +1,7 @@
 package edu.mum.qtree.services;
 
 import edu.mum.qtree.dao.UserRepository;
+import edu.mum.qtree.exceptions.BusinessException;
 import edu.mum.qtree.models.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -33,9 +34,10 @@ public class UserService {
         return userRepository.saveAndFlush(user);
     }
 
-    public Optional<User> getUser(int id)
-    {
-        return userRepository.findById(id);
+    public User getUser(int id) throws BusinessException {
+        return userRepository
+                .findById(id)
+                .orElseThrow(() -> new BusinessException("User not found"));
 
     }
 
@@ -45,9 +47,8 @@ public class UserService {
 
     }
 
-    public void deleteUser(int id)
-    {
-        User userToUpdate = getUser(id).get();
+    public void deleteUser(int id) throws BusinessException {
+        User userToUpdate = getUser(id);
 
         //ToDo:Check if this super admin, as super admin shouldn't be deleted
 
@@ -57,9 +58,8 @@ public class UserService {
         }
     }
 
-    public void Enable(int id)
-    {
-        User userToUpdate = getUser(id).get();
+    public void Enable(int id) throws BusinessException {
+        User userToUpdate = getUser(id);
 
         if(userToUpdate != null) {
             userToUpdate.setIsEnabled((byte)1);
