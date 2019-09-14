@@ -3,12 +3,13 @@ package edu.mum.qtree.controllers;
 import edu.mum.qtree.services.TagsStatisticsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.jws.WebService;
 import java.util.List;
 
-@WebService
+@RestController
 public class TagsStatisticsController {
+
     @Autowired
     private TagsStatisticsService service;
 
@@ -23,3 +24,4 @@ public class TagsStatisticsController {
     }
 
 }
+
