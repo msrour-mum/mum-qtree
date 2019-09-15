@@ -33,9 +33,6 @@ public class QuestionService {
     @Qualifier("QuestionTagsRepository")
     private QuestionTagsRepository repQuestionTag;
 
-
-
-
     @Transactional
     public void Add(Question question) {
         Question q = rep.save(question);
