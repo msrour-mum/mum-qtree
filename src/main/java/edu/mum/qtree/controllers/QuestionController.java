@@ -24,13 +24,13 @@ public class QuestionController
     @Autowired
     private QuestionService questionService;
 
-    @GetMapping("/Question")
+    @GetMapping("/Question/Info")
     public List<Question> list()
     {
         return questionService.list();
     }
 
-    @GetMapping("/Question/{id}")
+    @GetMapping("/Question/Info/{id}")
     public Optional<Question> SelectOne(@PathVariable("id") int id)
     {
         return questionService.SelectOne(id);
@@ -66,14 +66,14 @@ public class QuestionController
     {
         return questionService.Search(pattern);
     }
-    @GetMapping("/Question/Info/{id}")
+    @GetMapping("/Question/{id}")
     public ItemTextInfo SelectOneInfo(@PathVariable("id") int id)
     {
         return questionService.SelectOneInfo(id);
     }
 
 
-    @GetMapping("/Question/Info")
+    @GetMapping("/Question")
     public List<ItemTextInfo> listInfo()
     {
         return questionService.ListInfo();
