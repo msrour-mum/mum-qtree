@@ -11,6 +11,10 @@ public class TopUser implements Comparable<TopUser>{
         this.reputation = reputation;
     }
 
+    public TopUser() {
+
+    }
+
     public int getId() {
         return id;
     }
@@ -34,6 +38,6 @@ public class TopUser implements Comparable<TopUser>{
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", reputation=" + reputation +
-                '}';
+                '}'+"\n";
     }
 }
