@@ -1,6 +1,7 @@
 package edu.mum.qtree.controllers;
 
 import edu.mum.qtree.dto.dbUtility;
+import edu.mum.qtree.models.custom.ItemTextInfo;
 import edu.mum.qtree.models.custom.ItemTextRequest;
 import edu.mum.qtree.models.entities.Comment;
 import edu.mum.qtree.services.CommentService;
@@ -29,9 +30,8 @@ public class CommentController
         return service.SelectOne(id);
     }
 
-    @PostMapping("/Comment")
-    public  void Add(@RequestBody ItemTextRequest request)
-    {
+    @PostMapping("/CommentComment")
+    public  void Add(@RequestBody ItemTextRequest request){
         Comment ent=new Comment();
         //question.setId(request.getId());
         ent.setText(request.getText());
@@ -43,9 +43,9 @@ public class CommentController
     }
 
     @PutMapping ("/Comment")
-    public void Update(@RequestBody Comment question)
+    public void Update(@RequestBody ItemTextRequest  request)
     {
-        service.Update(question);;
+        service.Update(request.getId(),request.getText());
     }
 
     @DeleteMapping("/Comment/{id}")
@@ -54,4 +54,21 @@ public class CommentController
         service.Delete(id);
     }
 
+    @GetMapping("/Comment/search/{pattern}")
+    public List<ItemTextInfo> Search(@PathVariable("pattern")  String pattern)
+    {
+        return service.Search(pattern);
+    }
+
+    @GetMapping("/Comment/Info/{id}")
+    public ItemTextInfo SelectOneInfo(@PathVariable("id") int id)
+    {
+        return service.SelectOneInfo(id);
+    }
+
+    @GetMapping("/Comment/Info")
+    public List<ItemTextInfo> listInfo()
+    {
+        return service.ListInfo();
+    }
 }

@@ -1,7 +1,9 @@
 package edu.mum.qtree.controllers;
 
 import edu.mum.qtree.dto.dbUtility;
+import edu.mum.qtree.models.custom.ItemTextInfo;
 import edu.mum.qtree.models.custom.ItemTextRequest;
+import edu.mum.qtree.models.custom.VoteRequest;
 import edu.mum.qtree.models.entities.Answer;
 import edu.mum.qtree.models.entities.Question;
 import edu.mum.qtree.services.AnswerService;
@@ -43,16 +45,44 @@ public class AnswerController
         service.Add(ent);;
     }
 
+
     @PutMapping ("/Answer")
-    public void Update(@RequestBody Answer question)
+    public void Update(@RequestBody ItemTextRequest  request)
     {
-        service.Update(question);;
+        service.Update(request.getId(),request.getText());
     }
+
 
     @DeleteMapping("/Answer/{id}")
     public void Delete(@PathVariable("id") int id)
     {
         service.Delete(id);
+    }
+
+
+    @GetMapping("/Answer/search/{pattern}")
+    public List<ItemTextInfo> Search(@PathVariable("pattern")  String pattern)
+    {
+        return service.Search(pattern);
+    }
+    @GetMapping("/Answer/Info/{id}")
+    public ItemTextInfo SelectOneInfo(@PathVariable("id") int id)
+    {
+        return service.SelectOneInfo(id);
+    }
+
+
+    @GetMapping("/Answer/Info")
+    public List<ItemTextInfo> listInfo()
+    {
+        return service.ListInfo();
+    }
+
+
+    @PostMapping("/Answer/Vote")
+    public void Vote(@RequestBody VoteRequest request)
+    {
+        service.Vote(request.getUserId(),request.getAnswerId(),request.getLike());
     }
 
 }
