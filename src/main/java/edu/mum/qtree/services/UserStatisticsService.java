@@ -16,7 +16,7 @@ import java.util.List;
 public class UserStatisticsService {
 
     @Autowired
-    private UserService userService ;
+    public UserService userService ;
 
     public List<TopUser> getTopReputatedUser(){
         List<TopUser> users = new ArrayList<>();
@@ -49,14 +49,14 @@ public class UserStatisticsService {
         return updatedUsers;
     }
 
-    private int getUserReputationsByQuestions(User user){
+    public int getUserReputationsByQuestions(User user){
         int numOfQuestion = 0;
         for(Question q : user.getQuestions()){
             if(q.getAnswers().size() >= 3) numOfQuestion ++ ;
         }
         return  ((numOfQuestion / 3)*10) ;
     }
-    private int getUserReputationByAnswers(User user){
+    public int getUserReputationByAnswers(User user){
         int numOfAnswers =0 ;
         for (Answer a: user.getAnswers()){
             int positiveVotes =0 ;
@@ -69,6 +69,7 @@ public class UserStatisticsService {
                 if ((positiveVotes / negativeVotes) >= 5) numOfAnswers++ ;
             }
         }
-        return ((numOfAnswers/3)*10) ;
+        return ((numOfAnswers/2)*10) ;
     }
+
 }

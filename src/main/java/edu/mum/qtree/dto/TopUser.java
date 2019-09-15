@@ -27,4 +27,13 @@ public class TopUser implements Comparable<TopUser>{
     public int compareTo(TopUser o) {
         return o.reputation - this.reputation ;
     }
+
+    @Override
+    public String toString() {
+        return "TopUser{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", reputation=" + reputation +
+                '}';
+    }
 }
