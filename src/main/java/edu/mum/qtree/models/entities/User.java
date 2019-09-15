@@ -18,7 +18,7 @@ public class User implements UserDetails {
     private String email;
     private String name;
     private String password;
-    private byte isEnabled;
+    private boolean isEnabled;
     private Date createdOn;
     private Date modifiedOn;
     private Collection<Answer> answers;
@@ -102,7 +102,7 @@ public class User implements UserDetails {
     @Override
     @Transient
     public boolean isEnabled() {
-        return  true;
+        return  getIsEnabled();
     }
 
     public void setPassword(String password) {
@@ -111,11 +111,11 @@ public class User implements UserDetails {
 
     @Basic
     @Column(name = "Is_Enabled", nullable = false)
-    public byte getIsEnabled() {
+    public boolean getIsEnabled() {
         return isEnabled;
     }
 
-    public void setIsEnabled(byte isEnabled) {
+    public void setIsEnabled(boolean isEnabled) {
         this.isEnabled = isEnabled;
     }
 
@@ -162,8 +162,7 @@ public class User implements UserDetails {
         int result = id;
         result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (password != null ? password.hashCode() : 0);
-        result = 31 * result + (int) isEnabled;
+        result = 31 * result + (password != null ? password.hashCode() : 0);;
         result = 31 * result + (createdOn != null ? createdOn.hashCode() : 0);
         result = 31 * result + (modifiedOn != null ? modifiedOn.hashCode() : 0);
         return result;

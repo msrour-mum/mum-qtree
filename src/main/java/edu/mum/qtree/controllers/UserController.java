@@ -1,6 +1,7 @@
 package edu.mum.qtree.controllers;
 import edu.mum.qtree.dto.UserUpdateDto;
 import edu.mum.qtree.exceptions.BusinessException;
+import edu.mum.qtree.models.custom.UserInfo;
 import edu.mum.qtree.models.entities.User;
 import edu.mum.qtree.models.entities.UserRole;
 import edu.mum.qtree.services.UserService;
@@ -20,13 +21,13 @@ public class UserController {
     //APIs
 
     @GetMapping()
-    public List<User> listUsers()
+    public List<UserInfo> listUsers()
     {
-        return userService.list();
+        return userService.listInfo();
     }
 
     @PutMapping()
-    public User updateUser(@RequestBody UserUpdateDto dto) throws BusinessException {
+    public void updateUser(@RequestBody UserUpdateDto dto) throws BusinessException {
         User user = userService.getUser(dto.getId());
 
         user.setId(dto.getId());
@@ -34,13 +35,12 @@ public class UserController {
         user.setUserRole(new UserRole(dto.getRoleId()));
         user.setModifiedOn(new Date());
 
-
-        return userService.save(user);
+         userService.save(user);
     }
 
     @GetMapping("/{id}")
-    public User getUser(@PathVariable("id") int id) throws BusinessException {
-        return userService.getUser(id);
+    public UserInfo getUser(@PathVariable("id") int id) throws BusinessException {
+        return userService.getUserInfo(id);
     }
 
     @DeleteMapping("/{id}")

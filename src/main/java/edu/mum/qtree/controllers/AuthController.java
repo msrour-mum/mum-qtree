@@ -3,6 +3,7 @@ package edu.mum.qtree.controllers;
 import edu.mum.qtree.dao.UserRepository;
 import edu.mum.qtree.dto.AuthenticationRequestDto;
 import edu.mum.qtree.dto.UserAddDto;
+import edu.mum.qtree.models.custom.UserInfo;
 import edu.mum.qtree.models.entities.User;
 import edu.mum.qtree.models.entities.UserRole;
 import edu.mum.qtree.security.jwt.JwtTokenProvider;
@@ -63,7 +64,7 @@ public class AuthController {
 
     @PermitAll
     @PostMapping("/signup")
-    public User signup(@RequestBody UserAddDto dto) {
+    public UserInfo signup(@RequestBody UserAddDto dto) {
 
            User user = new User();
 
@@ -71,8 +72,8 @@ public class AuthController {
             user.setEmail(dto.getEmail());
             user.setName(dto.getName());
             user.setPassword(dto.getPassword());
-            user.setIsEnabled(dto.getIsEnabled());
             user.setUserRole(new UserRole(dto.getRoleId()));
+            user.setIsEnabled(true);
             user.setCreatedOn(new Date());
             user.setModifiedOn(new Date());
 
