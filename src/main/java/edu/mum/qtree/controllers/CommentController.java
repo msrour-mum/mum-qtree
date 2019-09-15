@@ -18,19 +18,19 @@ public class CommentController
     private CommentService service;
     //APIs
 
-    @GetMapping("/Comment")
+    @GetMapping("/Comment/Info")
     public List<Comment> list()
     {
         return service.list();
     }
 
-    @GetMapping("/Comment/{id}")
+    @GetMapping("/Comment/Info/{id}")
     public Optional<Comment> SelectOne(@PathVariable("id") int id)
     {
         return service.SelectOne(id);
     }
 
-    @PostMapping("/CommentComment")
+    @PostMapping("/Comment")
     public  void Add(@RequestBody ItemTextRequest request){
         Comment ent=new Comment();
         //question.setId(request.getId());
@@ -60,13 +60,13 @@ public class CommentController
         return service.Search(pattern);
     }
 
-    @GetMapping("/Comment/Info/{id}")
+    @GetMapping("/Comment/{id}")
     public ItemTextInfo SelectOneInfo(@PathVariable("id") int id)
     {
         return service.SelectOneInfo(id);
     }
 
-    @GetMapping("/Comment/Info")
+    @GetMapping("/Comment")
     public List<ItemTextInfo> listInfo()
     {
         return service.ListInfo();

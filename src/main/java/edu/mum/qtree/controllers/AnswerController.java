@@ -20,13 +20,13 @@ public class AnswerController
     private AnswerService service;
     //APIs
 
-    @GetMapping("/Answer")
+    @GetMapping("/Answer/Info")
     public List<Answer> list()
     {
         return service.list();
     }
 
-    @GetMapping("/Answer/{id}")
+    @GetMapping("/Answer/Info/{id}")
     public Optional<Answer> SelectOne(@PathVariable("id") int id)
     {
         return service.SelectOne(id);
@@ -65,14 +65,14 @@ public class AnswerController
     {
         return service.Search(pattern);
     }
-    @GetMapping("/Answer/Info/{id}")
+    @GetMapping("/Answer/{id}")
     public ItemTextInfo SelectOneInfo(@PathVariable("id") int id)
     {
         return service.SelectOneInfo(id);
     }
 
 
-    @GetMapping("/Answer/Info")
+    @GetMapping("/Answer")
     public List<ItemTextInfo> listInfo()
     {
         return service.ListInfo();
