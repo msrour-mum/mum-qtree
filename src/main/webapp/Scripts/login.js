@@ -1,5 +1,10 @@
 var xhr = new XMLHttpRequest();
-var token='';
+function setCookie(cname, cvalue, exdays) {
+  var d = new Date();
+  d.setTime(d.getTime() + (exdays*24*60*60*1000));
+  var expires = "expires="+ d.toUTCString();
+  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
 function SignIn()
 {
   var url = "http://localhost:8080/auth/signin";
@@ -9,7 +14,7 @@ function SignIn()
   xhr.onreadystatechange = function () {
     if (xhr.readyState === 4 && xhr.status === 200) {
       var json = JSON.parse(xhr.responseText);
-      token=json.token;
+      setCookie('qtree_access_token',json.token,10);
       window.location.href = "http://localhost:63342/qtree/src/main/webapp/views/index.html";
     }else if (xhr.readyState === 4 && xhr.status == 403) {
       window.alert("Wrong user name or password");

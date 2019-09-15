@@ -1,8 +1,22 @@
 var xhr = new XMLHttpRequest();
-var token='';
+function getCookie(cname) {
+  var name = cname + "=";
+  var decodedCookie = decodeURIComponent(document.cookie);
+  var ca = decodedCookie.split(';');
+  for(var i = 0; i <ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
 function SearchQuestions()
 {
-  var url = "http://localhost:8080/auth/signin";
+  var url = "http://localhost:8080/Question/Info";
   xhr.open("POST", url, true);
   xhr.setRequestHeader('Content-type','application/json');
 
@@ -16,20 +30,16 @@ function SearchQuestions()
       window.location.href = "http://localhost:63342/qtree/src/main/webapp/views/login.html";
     }
   };
-  var data =GetSignInParam();
+  var data =GetSearchParam();
   xhr.send(data);
   event.preventDefault();
   event.stopPropagation();
 }
 function GetSearchParam()
 {
-  var username = document.getElementById("uname").value;
-  var password= document.getElementById("pwd").value;
   var jsonText = {
-    username: username,
-    password: password
+    Authorization: getCookie('qtree_access_token')
   };
-
   return JSON.stringify(jsonText);
 }
 

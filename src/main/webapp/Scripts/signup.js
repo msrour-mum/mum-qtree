@@ -1,5 +1,4 @@
 var xhr = new XMLHttpRequest();
-var token='';
 function AddUser()
 {
 var url = "http://localhost:8080/auth/signup";
