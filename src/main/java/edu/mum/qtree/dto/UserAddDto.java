@@ -6,7 +6,6 @@ public class UserAddDto {
     private String email;
     private String name;
     private String password;
-    private byte isEnabled;
     private int roleId;
 
     public int getId() {
@@ -39,14 +38,6 @@ public class UserAddDto {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public byte getIsEnabled() {
-        return isEnabled;
-    }
-
-    public void setIsEnabled(byte isEnabled) {
-        this.isEnabled = isEnabled;
     }
 
     public int getRoleId() {
