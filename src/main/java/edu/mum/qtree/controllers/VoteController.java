@@ -34,7 +34,7 @@ public class VoteController {
     {
         Vote ent=new Vote();
         //question.setId(request.getId());
-        ent.setLike(request.isLike());
+        ent.setLike(request.getLike());
         ent.setAnswer(dbUtility.quickAnswer(request.getAnswerId()));
         service.Add(ent);
     }

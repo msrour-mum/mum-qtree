@@ -1,6 +1,7 @@
 package edu.mum.qtree.controllers;
 
 import edu.mum.qtree.dto.dbUtility;
+import edu.mum.qtree.models.custom.ItemTextInfo;
 import edu.mum.qtree.models.custom.ItemTextRequest;
 import edu.mum.qtree.models.entities.Question;
 import edu.mum.qtree.models.entities.TextStatus;
@@ -22,32 +23,20 @@ public class QuestionController
 {
     @Autowired
     private QuestionService questionService;
-    //APIs
 
-    @GetMapping("/Questions")
+    @GetMapping("/Question")
     public List<Question> list()
     {
         return questionService.list();
     }
 
-    @GetMapping("/Questions/{id}")
+    @GetMapping("/Question/{id}")
     public Optional<Question> SelectOne(@PathVariable("id") int id)
     {
         return questionService.SelectOne(id);
     }
 
-
-   /* @GetMapping("/SearchQuestions")
-    public List<Question> list(@RequestParam("s") String txt)
-    {
-
-        return questionService.Search(txt);
-    }
-*/
-
-
-
-    @PostMapping("/Questions")
+    @PostMapping ("/Question/Add")
     public  void Add(@RequestBody ItemTextRequest  request)
     {
         Question question=new Question();
@@ -59,24 +48,34 @@ public class QuestionController
         questionService.Add(question);;
     }
 
-    @PutMapping ("/Questions")
-    public void Update(ItemTextRequest  request)
+    @PutMapping ("/Question")
+    public void Update(@RequestBody ItemTextRequest  request)
     {
-       // questionService.Update(request.getId(),request.getText());
-
-        Question question=new Question();
-        question.setId(request.getId());
-        question.setText(request.getText());
-        question.setCreationDate(dbUtility.Now());
-        question.setTextStatus(dbUtility.quickTextStatus(1));
-        question.setUser(dbUtility.quickUser(request.getUserId()));
-        questionService.Add(question);;
+        questionService.Update(request.getId(),request.getText());
     }
 
-    @DeleteMapping("/Questions/{id}")
+    @DeleteMapping("/Question/{id}")
     public void Delete(@PathVariable("id") int id)
     {
         questionService.Delete(id);
     }
 
+
+    @GetMapping("/Question/search/{pattern}")
+    public List<ItemTextInfo> Search(@PathVariable("pattern")  String pattern)
+    {
+        return questionService.Search(pattern);
+    }
+    @GetMapping("/Question/Info/{id}")
+    public ItemTextInfo SelectOneInfo(@PathVariable("id") int id)
+    {
+        return questionService.SelectOneInfo(id);
+    }
+
+
+    @GetMapping("/Question/Info")
+    public List<ItemTextInfo> listInfo()
+    {
+        return questionService.ListInfo();
+    }
 }

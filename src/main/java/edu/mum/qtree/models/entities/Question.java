@@ -11,11 +11,14 @@ import java.util.Collection;
 @Entity
 @Indexed
 public class Question {
+
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @Field(termVector = TermVector.YES)
     private String text;
     private Timestamp creationDate;
     private Collection<Answer> answers;
+//    private Collection<Tag> tags;
 
     @ManyToOne(fetch = FetchType.LAZY, targetEntity = TextStatus.class)
     @JoinColumn(name = "Status_ID", insertable = false, updatable = false)
@@ -28,6 +31,7 @@ public class Question {
 
     @Id
     @Column(name = "ID", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public long getId() {
         return id;
     }
@@ -87,6 +91,15 @@ public class Question {
     public void setAnswers(Collection<Answer> answers) {
         this.answers = answers;
     }
+
+//    //@OneToMany(mappedBy = "question")
+//    public Collection<Tag> getTags() {
+//        return tags;
+//    }
+
+//    public void setTags(Collection<Tag> tags) {
+//        this.tags = tags;
+//    }
 
     @ManyToOne
     @JoinColumn(name = "Status_ID", referencedColumnName = "ID", nullable = false)
