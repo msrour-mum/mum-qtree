@@ -30,7 +30,17 @@ public class QuestionControllerTest {
 
     @Test
     public void getAllQuestions() throws Exception {
-        mockMvc.perform(get("/Questions/"))
+        mockMvc.perform(get("/Question/Info/"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(content().json("[]"));
+
+        verify(questionService, times(1)).list();
+    }
+
+    @Test
+    public void getAllQuestions2() throws Exception {
+        mockMvc.perform(get("/Question/Info/"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(content().json("[]"));

@@ -1,14 +1,18 @@
 package edu.mum.qtree.controllers;
+import edu.mum.qtree.dto.UserUpdateDto;
+import edu.mum.qtree.exceptions.BusinessException;
+import edu.mum.qtree.models.custom.UserInfo;
 import edu.mum.qtree.models.entities.User;
+import edu.mum.qtree.models.entities.UserRole;
 import edu.mum.qtree.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
-//@RequestMapping("/users")
+@RequestMapping("/users")
 public class UserController {
 
     @Autowired
@@ -16,23 +20,37 @@ public class UserController {
 
     //APIs
 
-    @GetMapping("/users")
-    public List<User> listUsers()
+    @GetMapping()
+    public List<UserInfo> listUsers()
     {
-        return userService.list();
+        return userService.listInfo();
     }
 
-    @PostMapping("/users")
-    public User addUser(@RequestBody User user)
-    {
-        userService.Add(user);
-        return user;
+    @PutMapping()
+    public void updateUser(@RequestBody UserUpdateDto dto) throws BusinessException {
+        User user = userService.getUser(dto.getId());
+
+        user.setId(dto.getId());
+        user.setName(dto.getName());
+        user.setUserRole(new UserRole(dto.getRoleId()));
+        user.setModifiedOn(new Date());
+
+         userService.save(user);
     }
 
-    @GetMapping("/users/{id}")
-    public Optional<User> getUser(@PathVariable("id") int id)
-    {
-        return userService.getUser(id);
+    @GetMapping("/{id}")
+    public UserInfo getUser(@PathVariable("id") int id) throws BusinessException {
+        return userService.getUserInfo(id);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteUser(@PathVariable("id") int id) throws BusinessException {
+        userService.deleteUser(id);
+    }
+
+    @PatchMapping("/{id}")
+    public void enableUser(@PathVariable("id") int id) throws BusinessException {
+        userService.Enable(id);
     }
 
 }

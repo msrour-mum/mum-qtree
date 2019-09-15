@@ -22,7 +22,7 @@ public class UserServiceTest {
     @Test
     public void updateUserRepo() {
         User u1= new User();
-        service.Add(u1);
+        service.save(u1);
         repositoryNewSize = service.list().size();
         assertEquals(repositoryNewSize,repositoryOldSize+1);
     }

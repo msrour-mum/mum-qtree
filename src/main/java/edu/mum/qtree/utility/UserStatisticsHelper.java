@@ -20,7 +20,7 @@ public class UserStatisticsHelper {
             int negativeVotes = 0 ;
             if (a.getVotes().size()>= 3){
                 for (Vote v : a.getVotes()){
-                    if(v.isLike()) positiveVotes++ ;
+                    if(v.isLike()==1) positiveVotes++ ;
                     else negativeVotes++ ;
                 }
                 if ((positiveVotes / negativeVotes) >= 5) numOfAnswers++ ;

@@ -10,6 +10,15 @@ public class UserRole {
     private String name;
     private Collection<User> users;
 
+    public UserRole()
+    {
+
+    }
+
+    public UserRole(int roleId)
+    {
+        setId(roleId);
+    }
     @Id
     @Column(name = "ID", nullable = false)
     public int getId() {
@@ -50,7 +59,7 @@ public class UserRole {
         return result;
     }
 
-    @OneToMany(mappedBy = "userRole")
+    @OneToMany(mappedBy = "userRole", fetch = FetchType.LAZY)
     public Collection<User> getUsers() {
         return users;
     }

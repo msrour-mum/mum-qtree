@@ -29,7 +29,7 @@ public class ItemSearchResult {
     }
 
 
-   @Id
+    @Id
     @Column(name = "ID", nullable = false)
     public long getId() {
         return itemId;

@@ -1,18 +1,26 @@
 package edu.mum.qtree.models.entities;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import javax.persistence.*;
-import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
+import java.util.List;
+
+import static java.util.stream.Collectors.toList;
 
 @Entity
-public class User {
+public class User implements UserDetails {
     private int id;
     private String email;
     private String name;
     private String password;
-    private byte isEnabled;
-    private Timestamp createdOn;
-    private Timestamp modifiedOn;
+    private boolean isEnabled;
+    private Date createdOn;
+    private Date modifiedOn;
     private Collection<Answer> answers;
     private Collection<Comment> comments;
     private Collection<Question> questions;
@@ -20,6 +28,8 @@ public class User {
     private Collection<UserCommunity> userCommunities;
     private Collection<UserJobs> userJobs;
     private Collection<Vote> votes;
+
+    private List<String> roles = new ArrayList<>();
 
     @Id
     @Column(name = "ID", nullable = false)
@@ -51,10 +61,48 @@ public class User {
         this.name = name;
     }
 
+    @Override
+    @Transient
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+
+        this.roles.add(getUserRole().getName());
+        return this.roles.stream().map(SimpleGrantedAuthority::new).collect(toList());
+    }
+
     @Basic
     @Column(name = "Password", nullable = false, length = 250)
     public String getPassword() {
         return password;
+    }
+
+    @Override
+    @Transient
+    public String getUsername() {
+        return getEmail();
+    }
+
+    @Override
+    @Transient
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    @Transient
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    @Transient
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    @Transient
+    public boolean isEnabled() {
+        return  getIsEnabled();
     }
 
     public void setPassword(String password) {
@@ -63,31 +111,31 @@ public class User {
 
     @Basic
     @Column(name = "Is_Enabled", nullable = false)
-    public byte getIsEnabled() {
+    public boolean getIsEnabled() {
         return isEnabled;
     }
 
-    public void setIsEnabled(byte isEnabled) {
+    public void setIsEnabled(boolean isEnabled) {
         this.isEnabled = isEnabled;
     }
 
     @Basic
     @Column(name = "created_on", nullable = false)
-    public Timestamp getCreatedOn() {
+    public Date getCreatedOn() {
         return createdOn;
     }
 
-    public void setCreatedOn(Timestamp createdOn) {
+    public void setCreatedOn(Date createdOn) {
         this.createdOn = createdOn;
     }
 
     @Basic
     @Column(name = "modified_on", nullable = false)
-    public Timestamp getModifiedOn() {
+    public Date getModifiedOn() {
         return modifiedOn;
     }
 
-    public void setModifiedOn(Timestamp modifiedOn) {
+    public void setModifiedOn(Date modifiedOn) {
         this.modifiedOn = modifiedOn;
     }
 
@@ -114,14 +162,13 @@ public class User {
         int result = id;
         result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (password != null ? password.hashCode() : 0);
-        result = 31 * result + (int) isEnabled;
+        result = 31 * result + (password != null ? password.hashCode() : 0);;
         result = 31 * result + (createdOn != null ? createdOn.hashCode() : 0);
         result = 31 * result + (modifiedOn != null ? modifiedOn.hashCode() : 0);
         return result;
     }
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     public Collection<Answer> getAnswers() {
         return answers;
     }
@@ -130,7 +177,7 @@ public class User {
         this.answers = answers;
     }
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     public Collection<Comment> getComments() {
         return comments;
     }
@@ -139,7 +186,7 @@ public class User {
         this.comments = comments;
     }
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     public Collection<Question> getQuestions() {
         return questions;
     }
@@ -158,7 +205,7 @@ public class User {
         this.userRole = userRole;
     }
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     public Collection<UserCommunity> getUserCommunities() {
         return userCommunities;
     }
@@ -167,7 +214,7 @@ public class User {
         this.userCommunities = userCommunities;
     }
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     public Collection<UserJobs> getUserJobs() {
         return userJobs;
     }
@@ -176,7 +223,7 @@ public class User {
         this.userJobs = userJobs;
     }
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     public Collection<Vote> getVotes() {
         return votes;
     }
