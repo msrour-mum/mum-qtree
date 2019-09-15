@@ -19,7 +19,5 @@ public interface QuestionRepository extends CrudRepository<Question,Long > {
     void UpdateData( @Param("questionId") long id,@Param("text") String text);
 
 
-    @Query("from Question q where q.text  like  :s")
-    List<Question> serachQuestion(@Param("s") String s);
 
 }
