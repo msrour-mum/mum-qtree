@@ -100,17 +100,17 @@ public class AnswerService {
         Vote vote=null;
         if(find.isPresent())
         {
-            /*vote=find.get();
+            vote=find.get();
             vote.setLike(like);
-            repVote.UpdateData(vote.getId(),like);*/
+            repVote.UpdateData(vote.getId(),like);
 
-            vote =new Vote();
-            vote.setAnswer(dbUtility.quickAnswer(answerId));
-            vote.setUser(dbUtility.quickUser(userId));
-
-            //vote.setId(userId);
-            vote.setLike(like);
-            repVote.save(vote);
+//            vote =new Vote();
+//            vote.setAnswer(dbUtility.quickAnswer(answerId));
+//            vote.setUser(dbUtility.quickUser(userId));
+//
+//            //vote.setId(userId);
+//            vote.setLike(like);
+           // repVote.save(vote);
         }
         else
         {
