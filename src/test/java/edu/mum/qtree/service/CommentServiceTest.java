@@ -4,29 +4,23 @@ import edu.mum.qtree.models.entities.Comment;
 import edu.mum.qtree.services.CommentService;
 import org.junit.Before;
 import org.junit.Test;
-
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 import static org.junit.Assert.assertEquals;
 
+
+@RunWith(SpringRunner.class)
+@SpringBootTest
 public class CommentServiceTest {
 
-
+    @Autowired
     private CommentService service ;
-    private int repositoryOldSize  ;
-    private int repositoryNewSize  ;
-    @Before
-    public void before(){
-        service = new CommentService();
 
-        repositoryOldSize = service.list().size();
-        System.out.println("testing adding to Repository");
-        System.out.println("Repository size = " +repositoryOldSize) ;
-
-    }
     @Test
     public void updateCommentRepo() {
-        Comment c1= new Comment();
-        service.Add(c1);
-        repositoryNewSize = service.list().size();
-        assertEquals(repositoryOldSize+1,repositoryNewSize);
+
+        assertEquals(0,service.list().size());
     }
 }

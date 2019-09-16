@@ -1,51 +1,60 @@
 package edu.mum.qtree.controller;
 
+
 import edu.mum.qtree.controllers.QuestionController;
 
+import edu.mum.qtree.dto.dbUtility;
+
+import edu.mum.qtree.models.entities.Question;
+import edu.mum.qtree.models.entities.TextStatus;
+import edu.mum.qtree.models.entities.User;
 import edu.mum.qtree.services.QuestionService;
+import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.MediaType;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.web.servlet.MockMvc;
+import org.mockito.InjectMocks;
+import org.mockito.MockitoAnnotations;
+import org.springframework.http.ResponseEntity;
 
-import static org.mockito.Mockito.verify;
-import static org.mockito.internal.verification.VerificationModeFactory.times;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@RunWith(SpringRunner.class)
-@WebMvcTest(QuestionController.class)
+import java.util.Arrays;
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.when;
+
 public class QuestionControllerTest {
 
-    @Autowired
-    private MockMvc mockMvc;
+    @InjectMocks
+    private QuestionController questionController ;
 
-    @MockBean
-    QuestionService questionService;
+    private QuestionService questionService = mock(QuestionService.class);
+    List<Question> questions ;
+    Question q1,q2,q3,q4,q5,q6;
 
-    @Test
-    public void getAllQuestions() throws Exception {
-        mockMvc.perform(get("/Question/Info/"))
-                .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-                .andExpect(content().json("[]"));
+    @Before
+    public void setUp(){
+        MockitoAnnotations.initMocks(this);
+         q1= new Question();
+         q2 = new Question();
+         q3 = new Question();
+         q4 = new Question();
+         q5 = new Question();
+         q6 = new Question();
 
-        verify(questionService, times(1)).list();
+        User u1 = new User(); u1.setId(1); u1.setName("mo");
+        TextStatus ts = new TextStatus(); ts.setId((short) 1); ts.setName("mo");
+
     }
 
     @Test
-    public void getAllQuestions2() throws Exception {
-        mockMvc.perform(get("/Question/Info/"))
-                .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-                .andExpect(content().json("[]"));
+    public void listInfo(){
+        questions = Arrays.asList(q1,q2,q3,q4,q5,q6);
+        when(questionService.list()).thenReturn(questions);
 
-        verify(questionService, times(1)).list();
+        //final ResponseEntity<List<Question>> respons =  questionController.list();
+        assertNotNull(questionController.listInfo());
+       // assertEquals(200,respons.getStatusCode());
     }
-
 }

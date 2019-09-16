@@ -5,31 +5,55 @@ import edu.mum.qtree.models.entities.Answer;
 import edu.mum.qtree.models.entities.Question;
 import edu.mum.qtree.services.QueStatisticsService;
 import edu.mum.qtree.services.QuestionService;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.List;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+import static org.junit.Assert.assertEquals;
+
 
 public class QueStatisticsServiceTest {
-    QuestionService qs ;
 
-    public static void main(String[] args) {
-        QueStatisticsServiceTest c = new QueStatisticsServiceTest();
-        QueStatisticsService q = new QueStatisticsService();
-        c.setUp();
-        q.repo = c.qs ;
-        System.out.println(q.getPopularQuestions());
-        System.out.println(q.getTopQuestion());
+    Question q1,q2,q3,q4,q5,q6 ;
+    TopQuestion tq4,tq5;
+    QuestionService qs ;
+    QueStatisticsService q ;
+
+    @Before
+    public void beforeTest() {
+        q = new QueStatisticsService();
+        setUp();
+        q.repo = qs ;
+        tq4 = new TopQuestion(4,"q4");
+        tq5 = new TopQuestion(5, "q5");
+//        System.out.println(q.getPopularQuestions());
+//        System.out.println(q.getTopQuestion());
+
+    }
+
+    @Test
+    public void testPopular(){
+         assertEquals((q.getPopularQuestions().get(0)).getId(),tq4.getId());
+        assertEquals((q.getPopularQuestions().get(q.getPopularQuestions().size()-1)).getId(),tq5.getId());
+
+    }
+    @Test
+    public void testTopQuestion(){
+        assertEquals(q.getTopQuestion().getId(),tq4.getId());
     }
     public void setUp(){
-        Question q1 = new Question();
-        Question q2 = new Question();
-        Question q3 = new Question();
-        Question q4 = new Question();
-        Question q5 = new Question();
-        Question q6 = new Question();
+         q1 = new Question();
+         q2 = new Question();
+         q3 = new Question();
+         q4 = new Question();
+         q5 = new Question();
+         q6 = new Question();
 
         Answer a1 = new Answer();
         Answer a2 = new Answer();

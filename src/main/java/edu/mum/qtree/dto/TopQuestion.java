@@ -8,8 +8,6 @@ public class TopQuestion {
     private long id ;
     private String text ;
 
-
-
     public TopQuestion(long id, String text) {
         this.id = id;
         this.text = text;
@@ -18,6 +16,7 @@ public class TopQuestion {
     public long getId() {
         return id;
     }
+
     public String getText() {
         return text;
     }
@@ -37,4 +36,5 @@ public class TopQuestion {
                 ", text='" + text + '\'' +
                 '}';
     }
+
 }

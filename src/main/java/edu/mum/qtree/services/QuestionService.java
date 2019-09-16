@@ -93,7 +93,9 @@ public class QuestionService {
 
         for (int i = 0; i < lst.size(); i++) {
             Question item = lst.get(i);
-            ItemTextInfo txt = new ItemTextInfo(item.getId(), item.getText(), item.getUser().getId(), item.getTextStatus().getId(), item.getUser().getName(), item.getTextStatus().getName(), item.getCreationDate(), 0);
+            ItemTextInfo txt = new ItemTextInfo(item.getId(), item.getText(),
+                    item.getUser().getId(), item.getTextStatus().getId(),
+                    item.getUser().getName(), item.getTextStatus().getName(), item.getCreationDate(), 0);
             lstResult.add(txt);
         }
         return lstResult;
