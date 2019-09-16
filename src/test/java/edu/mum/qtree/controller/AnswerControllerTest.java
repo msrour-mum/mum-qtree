@@ -2,12 +2,14 @@ package edu.mum.qtree.controller;
 
 import edu.mum.qtree.controllers.AnswerController;
 import edu.mum.qtree.controllers.CommentController;
+import edu.mum.qtree.models.custom.ItemTextInfo;
 import edu.mum.qtree.models.entities.Answer;
 import edu.mum.qtree.services.AnswerService;
 import edu.mum.qtree.services.CommentService;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import java.util.Arrays;
@@ -22,7 +24,13 @@ public class AnswerControllerTest {
     AnswerController answerController;
     AnswerService answerService = mock(AnswerService.class);
 
-    Answer a1 = new Answer();Answer a2 = new Answer();Answer a3 = new Answer();
+
+    @Mock
+    ItemTextInfo i1;
+    @Mock
+    ItemTextInfo i2;
+    @Mock
+    ItemTextInfo i3;
 
     @Before
     public void setUp(){
@@ -30,8 +38,8 @@ public class AnswerControllerTest {
     }
     @Test
     public void list(){
-        List<Answer> answers = Arrays.asList(a1,a2,a3);
-        when(answerService.list()).thenReturn(answers);
-        assertEquals(answers.size(),answerController.listInfo().size());
+        List<ItemTextInfo> items = Arrays.asList(i1,i2,i3);
+        when(answerService.ListInfo()).thenReturn(items);
+        assertEquals(items.size(),answerController.listInfo().size());
     }
 }
