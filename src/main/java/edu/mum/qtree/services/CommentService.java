@@ -70,4 +70,18 @@ public class CommentService {
         }
         return lstResult;
     }
+
+
+    public List<ItemTextInfo> ListComment(long questionId) {
+        List<Comment> lst = (List<Comment>) rep.findAll();
+        ArrayList<ItemTextInfo> lstResult = new ArrayList<ItemTextInfo>();
+        for (int i = 0; i < lst.size(); i++) {
+            Comment item = lst.get(i);
+            if (item.getAnswers().getId()== questionId) {
+                ItemTextInfo txt = new ItemTextInfo(item.getId(), item.getText(), item.getUser().getId(), item.getTextStatus().getId(), item.getUser().getName(), item.getTextStatus().getName(), item.getCreationDate(), questionId);
+                lstResult.add(txt);
+            }
+        }
+        return lstResult;
+    }
 }
