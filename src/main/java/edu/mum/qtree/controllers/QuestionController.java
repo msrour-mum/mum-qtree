@@ -24,6 +24,14 @@ public class QuestionController
     @Autowired
     private QuestionService questionService;
 
+    public QuestionService getQuestionService() {
+        return questionService;
+    }
+
+    public void setQuestionService(QuestionService questionService) {
+        this.questionService = questionService;
+    }
+
     @GetMapping("/Question/Info")
     public List<Question> list()
     {

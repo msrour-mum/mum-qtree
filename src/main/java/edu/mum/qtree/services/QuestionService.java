@@ -33,6 +33,14 @@ public class QuestionService {
     @Qualifier("QuestionTagsRepository")
     private QuestionTagsRepository repQuestionTag;
 
+    public QuestionRepository getRep() {
+        return rep;
+    }
+
+    public void setRep(QuestionRepository rep) {
+        this.rep = rep;
+    }
+
     @Transactional
     public void Add(Question question) {
         Question q = rep.save(question);
@@ -95,7 +103,9 @@ public class QuestionService {
 
         for (int i = 0; i < lst.size(); i++) {
             Question item = lst.get(i);
-            ItemTextInfo txt = new ItemTextInfo(item.getId(), item.getText(), item.getUser().getId(), item.getTextStatus().getId(), item.getUser().getName(), item.getTextStatus().getName(), item.getCreationDate(), 0);
+            ItemTextInfo txt = new ItemTextInfo(item.getId(), item.getText(),
+                    item.getUser().getId(), item.getTextStatus().getId(),
+                    item.getUser().getName(), item.getTextStatus().getName(), item.getCreationDate(), 0);
             lstResult.add(txt);
         }
         return lstResult;

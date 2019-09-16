@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 
 public class dbUtility {
 
-    public static Timestamp Now()
+        public static Timestamp Now()
     {
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         return  new Timestamp(timestamp.getTime());

@@ -22,7 +22,7 @@ public class UserService {
 
     public List<User> list()
     {
-        return userRepository.findAll();
+           return userRepository.findAll();
     }
 
     public List<UserInfo> listInfo()
