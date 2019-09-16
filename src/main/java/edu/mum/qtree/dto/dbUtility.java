@@ -3,6 +3,10 @@ package edu.mum.qtree.dto;
 import edu.mum.qtree.models.entities.*;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class dbUtility {
 
@@ -42,5 +46,21 @@ public class dbUtility {
         Comment obj=new Comment();
         obj.setId(id);
         return obj;
+    }
+
+
+
+
+    public static List<String> getHashtag(String text) {
+
+        Pattern pattern = Pattern.compile("#(\\S+)");
+        Matcher mat = pattern.matcher(text);
+        List<String> tagArray=new ArrayList<String>();
+        while (mat.find()) {
+
+            tagArray.add(mat.group(1));
+        }
+        return tagArray;
+
     }
 }
