@@ -35,6 +35,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/auth/signin").permitAll()
                 .antMatchers("/auth/signup").permitAll()
+                //remove
+                .antMatchers("/auth/**").permitAll()
+//                .antMatchers("/Answer/**").permitAll()
+//                .antMatchers("/Comment/**").permitAll()
+//                .antMatchers("/Questions/**").permitAll()
+//                .antMatchers("/Statistics/**").permitAll()
+//                .antMatchers("/users/**").permitAll()
+//                .antMatchers("/Vote/**").permitAll()
+//                .antMatchers("/*/**").permitAll()
+                //end remove
+                .antMatchers("/v2/api-docs",
+                        "/configuration/ui",
+                        "/swagger-resources/**",
+                        "/configuration/security",
+                        "/swagger-ui.html",
+                        "/webjars/**").permitAll()
                 //.antMatchers(HttpMethod.GET, "/vehicles/**").permitAll()
                 //.antMatchers(HttpMethod.DELETE, "/vehicles/**").hasRole("1")
                 //.antMatchers(HttpMethod.GET, "/v1/vehicles/**").permitAll()

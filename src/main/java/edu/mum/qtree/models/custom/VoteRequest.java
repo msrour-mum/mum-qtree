@@ -32,7 +32,7 @@ public class VoteRequest {
         this.answerId = answerId;
     }
 
-    public int getLike() {
+    public int isLike() {
         return like;
     }
 
