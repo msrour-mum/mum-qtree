@@ -4,8 +4,8 @@ import javax.persistence.*;
 
 @Entity
 public class Vote {
-    private int id;
-    private boolean like;
+    private long id;
+    private int like;
 
     @ManyToOne(fetch = FetchType.LAZY, targetEntity = User.class)
     @JoinColumn(name = "User_ID", insertable = false, updatable = false)
@@ -17,21 +17,22 @@ public class Vote {
 
     @Id
     @Column(name = "ID", nullable = false)
-    public int getId() {
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
     @Basic
     @Column(name = "like", nullable = false)
-    public boolean isLike() {
+    public int isLike() {
         return like;
     }
 
-    public void setLike(boolean like) {
+    public void setLike(int like) {
         this.like = like;
     }
 
@@ -50,8 +51,8 @@ public class Vote {
 
     @Override
     public int hashCode() {
-        int result = id;
-        result = 31 * result + (like ? 1 : 0);
+        int result = (int) (id ^ (id >>> 32));
+        result = 31 * result + like;
         return result;
     }
 
