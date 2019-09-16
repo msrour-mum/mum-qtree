@@ -11,6 +11,10 @@ public class TopUser implements Comparable<TopUser>{
         this.reputation = reputation;
     }
 
+    public TopUser() {
+
+    }
+
     public int getId() {
         return id;
     }
@@ -26,5 +30,14 @@ public class TopUser implements Comparable<TopUser>{
     @Override
     public int compareTo(TopUser o) {
         return o.reputation - this.reputation ;
+    }
+
+    @Override
+    public String toString() {
+        return "TopUser{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", reputation=" + reputation +
+                '}'+"\n";
     }
 }

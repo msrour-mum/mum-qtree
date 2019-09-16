@@ -80,3 +80,5 @@ edu.mum.qtree.models.entities.Question/segments_1
 edu.mum.qtree.models.entities.Question/write.lock
 
 edu.mum.qtree.models.entities.Question/
+
+app.log

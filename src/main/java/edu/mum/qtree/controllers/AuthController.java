@@ -8,6 +8,8 @@ import edu.mum.qtree.models.entities.User;
 import edu.mum.qtree.models.entities.UserRole;
 import edu.mum.qtree.security.jwt.JwtTokenProvider;
 import edu.mum.qtree.services.UserService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -22,6 +24,7 @@ import java.util.*;
 
 import static org.springframework.http.ResponseEntity.ok;
 
+@Api(value = "Authentication Resourse",description = "Authentication Resourse")
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
@@ -38,6 +41,7 @@ public class AuthController {
     @Autowired
     UserRepository users;
 
+    @ApiOperation(value = "Make Login")
     @PermitAll
     @PostMapping("/signin")
     @CrossOrigin(origins = "http://localhost:63342")
@@ -57,6 +61,7 @@ public class AuthController {
         }
     }
 
+    @ApiOperation(value = "Make User Registration")
     @PermitAll
     @PostMapping("/signup")
     @CrossOrigin(origins = "http://localhost:63342")

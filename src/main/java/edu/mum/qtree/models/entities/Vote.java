@@ -27,8 +27,8 @@ public class Vote {
     }
 
     @Basic
-    @Column(name = "like", nullable = false)
-    public int isLike() {
+    @Column(name = "likes", nullable = false)
+    public int getLike() {
         return like;
     }
 

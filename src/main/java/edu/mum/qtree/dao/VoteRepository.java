@@ -22,5 +22,5 @@ public interface VoteRepository extends CrudRepository<Vote, Long> {
     @Transactional
     @Modifying
     @Query("UPDATE Vote q SET q.like =:like where q.id =:id")
-    void UpdateData(@Param("id") long id, @Param("like") int like);
+    void UpdateData(@Param("id") long id,  int like);
 }
