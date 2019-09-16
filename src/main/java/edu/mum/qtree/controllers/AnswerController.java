@@ -65,6 +65,7 @@ public class AnswerController
     {
         return service.Search(pattern);
     }
+
     @GetMapping("/Answer/{id}")
     public ItemTextInfo SelectOneInfo(@PathVariable("id") int id)
     {
@@ -79,10 +80,16 @@ public class AnswerController
     }
 
 
+    @GetMapping("/Answer/Question/{questionId}")
+    public List<ItemTextInfo> ListAnswer(@PathVariable("questionId") long questionId)
+    {
+        return service.ListAnswer(questionId);
+    }
+
     @PostMapping("/Answer/Vote")
     public void Vote(@RequestBody VoteRequest request)
     {
-        service.Vote(request.getUserId(),request.getAnswerId(),request.getLike());
+        service.Vote(request.getUserId(),request.getAnswerId(),request.isLike());
     }
 
 }
