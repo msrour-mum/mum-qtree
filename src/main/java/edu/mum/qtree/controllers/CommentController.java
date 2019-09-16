@@ -71,4 +71,11 @@ public class CommentController
     {
         return service.ListInfo();
     }
+
+
+    @GetMapping("/Comment/Answer/{answerId}")
+    public List<ItemTextInfo> ListAnswer(@PathVariable("answerId") long questionId)
+    {
+        return service.ListComment(questionId);
+    }
 }

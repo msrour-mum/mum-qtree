@@ -1,16 +1,10 @@
 package edu.mum.qtree.services;
 
-import edu.mum.qtree.dao.QuestionRepository;
+import edu.mum.qtree.dao.*;
 
-import edu.mum.qtree.dao.QuestionTagsRepository;
-import edu.mum.qtree.dao.TagRepository;
-import edu.mum.qtree.dao.VoteRepository;
 import edu.mum.qtree.dto.dbUtility;
 import edu.mum.qtree.models.custom.ItemTextInfo;
-import edu.mum.qtree.models.entities.Question;
-import edu.mum.qtree.models.entities.QuestionTags;
-import edu.mum.qtree.models.entities.Tag;
-import edu.mum.qtree.models.entities.Vote;
+import edu.mum.qtree.models.entities.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -32,6 +26,10 @@ public class QuestionService {
     @Autowired
     @Qualifier("QuestionTagsRepository")
     private QuestionTagsRepository repQuestionTag;
+
+//    @Autowired
+//    @Qualifier("AnswerRepository")
+//    private AnswerRepository repAnswer;
 
     @Transactional
     public void Add(Question question) {
@@ -101,6 +99,21 @@ public class QuestionService {
         return lstResult;
     }
 
+
+    public List<String> ListTags(long questionId) {
+        List<QuestionTags> lst = (List<QuestionTags>) repQuestionTag.findAll();
+        List<String> lstResult = new ArrayList<>();
+
+
+        for (int i = 0; i < lst.size(); i++) {
+            QuestionTags item = lst.get(i);
+            if (item.getQuestionId()==questionId) {
+               Tag tagItem= repTag.findById(item.getTagId()).get();
+               lstResult.add(tagItem.getName());
+            }
+        }
+        return lstResult;
+    }
 
 
 }

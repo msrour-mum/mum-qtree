@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+@RestController
 public class VoteController {
     @Autowired
     private VoteService service;
@@ -29,13 +30,21 @@ public class VoteController {
         return service.SelectOne(id);
     }
 
-    @PostMapping("/Vote")
+   /* @PostMapping("/Vote")
     public  void Add(@RequestBody VoteRequest request)
     {
         Vote ent=new Vote();
         //question.setId(request.getId());
         ent.setLike(request.getLike());
         ent.setAnswer(dbUtility.quickAnswer(request.getAnswerId()));
+        ent.setUser(dbUtility.quickUser(request.getUserId()));
+        service.Add(ent);
+    }*/
+
+    @PostMapping("/Vote")
+    public  void Add(@RequestBody Vote ent)
+    {
+
         service.Add(ent);
     }
 

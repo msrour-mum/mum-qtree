@@ -36,7 +36,7 @@ public class QuestionController
         return questionService.SelectOne(id);
     }
 
-    @PostMapping ("/Question/Add")
+    @PostMapping ("/Question")
     public  void Add(@RequestBody ItemTextRequest  request)
     {
         Question question=new Question();
@@ -77,5 +77,11 @@ public class QuestionController
     public List<ItemTextInfo> listInfo()
     {
         return questionService.ListInfo();
+    }
+
+    @GetMapping("/Question/Tag/{id}")
+    public List<String> ListTags(@PathVariable("id") int id)
+    {
+        return questionService.ListTags(id);
     }
 }
