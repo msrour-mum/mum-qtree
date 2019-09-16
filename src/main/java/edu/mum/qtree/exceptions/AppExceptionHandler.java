@@ -15,12 +15,16 @@ public class AppExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(BusinessException.class)
     public final ResponseEntity<ExceptionResponse> handleAllExceptions(BusinessException ex, WebRequest request) {
         ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getMessage(),request.getDescription(false), ex.getErrorCode());
+        logger.debug("handling BusinessException...");
+        logger.error(ex);
         return new ResponseEntity<>(exceptionResponse, ex.getHttpStatus());
     }
 
     @ExceptionHandler(Exception.class)
     public final ResponseEntity<ExceptionResponse> handleAllExceptions(ExceptionResponse ex, WebRequest request) {
         ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getMessage(),request.getDescription(false), 1);
+        logger.debug("handling VehicleNotFoundException...");
+        logger.error(ex);
         return new ResponseEntity<>(exceptionResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 

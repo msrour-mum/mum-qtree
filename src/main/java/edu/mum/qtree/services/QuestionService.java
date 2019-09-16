@@ -100,8 +100,20 @@ public class QuestionService {
     }
 
 
+    public List<String> ListTags(long questionId) {
+        List<QuestionTags> lst = (List<QuestionTags>) repQuestionTag.findAll();
+        List<String> lstResult = new ArrayList<>();
 
 
+        for (int i = 0; i < lst.size(); i++) {
+            QuestionTags item = lst.get(i);
+            if (item.getQuestionId()==questionId) {
+               Tag tagItem= repTag.findById(item.getTagId()).get();
+               lstResult.add(tagItem.getName());
+            }
+        }
+        return lstResult;
+    }
 
 
 }

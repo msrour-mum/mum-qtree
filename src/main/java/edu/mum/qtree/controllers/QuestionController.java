@@ -76,4 +76,10 @@ public class QuestionController
     {
         return questionService.ListInfo();
     }
+
+    @GetMapping("/Question/Tag/{id}")
+    public List<String> ListTags(@PathVariable("id") int id)
+    {
+        return questionService.ListTags(id);
+    }
 }

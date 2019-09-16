@@ -29,4 +29,9 @@ public class UserUpdateDto {
     public void setRoleId(int roleId) {
         this.roleId = roleId;
     }
+
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 }
