@@ -32,6 +32,6 @@ public class AnswerControllerTest {
     public void list(){
         List<Answer> answers = Arrays.asList(a1,a2,a3);
         when(answerService.list()).thenReturn(answers);
-        assertEquals(answers.size(),answerController.list().size());
+        assertEquals(answers.size(),answerController.listInfo().size());
     }
 }
