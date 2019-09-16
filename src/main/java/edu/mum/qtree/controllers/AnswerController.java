@@ -79,4 +79,10 @@ public class AnswerController
         service.Vote(request.getUserId(),request.getAnswerId(),request.isLike());
     }
 
+    @GetMapping("/Answer/Question/{questionId}")
+    public List<ItemTextInfo> ListAnswer(@PathVariable("questionId") long questionId)
+    {
+        return service.ListAnswer(questionId);
+    }
+
 }
