@@ -10,6 +10,7 @@ import edu.mum.qtree.services.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.PermitAll;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -23,7 +24,6 @@ public class QuestionController
 {
     @Autowired
     private QuestionService questionService;
-
     @GetMapping("/Question/Info")
     public List<Question> list()
     {
@@ -36,7 +36,9 @@ public class QuestionController
         return questionService.SelectOne(id);
     }
 
+    @PermitAll
     @PostMapping ("/Question/Add")
+    @CrossOrigin(origins = "http://localhost:63342")
     public  void Add(@RequestBody ItemTextRequest  request)
     {
         Question question=new Question();
@@ -60,8 +62,10 @@ public class QuestionController
         questionService.Delete(id);
     }
 
+    @PermitAll
 
     @GetMapping("/Question/search/{pattern}")
+    @CrossOrigin(origins = "http://localhost:63342")
     public List<ItemTextInfo> Search(@PathVariable("pattern")  String pattern)
     {
         return questionService.Search(pattern);
@@ -75,6 +79,13 @@ public class QuestionController
 
     @GetMapping("/Question")
     public List<ItemTextInfo> listInfo()
+    {
+        return questionService.ListInfo();
+    }
+
+    @GetMapping("/Question/qTest")
+    @CrossOrigin(origins = "http://localhost:63342")
+    public List<ItemTextInfo> qtesting()
     {
         return questionService.ListInfo();
     }

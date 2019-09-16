@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <title>Bootstrap Example</title>
     <meta charset="utf-8">
@@ -8,38 +8,25 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <script src="../Scripts/signup.js"></script>
     <script src="../Scripts/questionSearch.js"></script>
     <link rel="stylesheet" href="http://localhost:63342/qtree/src/main/webapp/CSS/Styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
+
 <body>
 <div class="jumbotron text-center">
     <h1>QTree </h1>
     <p>Search Questions</p>
     <p></p>
 </div>
-<div class="container">
+<div class="container" id="questionContainer">
     <p>Search QTree</p>
     <form class="example" >
-        <input type="text" placeholder="Search.." name="search">
+        <input type="text" placeholder="Search.." name="search" id = "searchBtn">
         <button type="submit" onclick="SearchQuestions();"><i class="fa fa-search"></i></button>
     </form>
     <p>&nbsp;</p>
-<button class="accordion">Section 1</button>
-<div class="panel" >
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-</div>
 
-<button class="accordion">Section 2</button>
-<div class="panel">
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-</div>
-
-<button class="accordion">Section 3</button>
-<div class="panel">
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-</div>
 
 </div>
 
