@@ -62,7 +62,7 @@ function AddAnswer(qID,answerText,userId)
 {
   var answer=document.getElementById(answerText).value;
   var xhrAnswer = new XMLHttpRequest();
-  var addAnswerURL = "http://localhost:8080/Question/Add";
+  var addAnswerURL = "http://localhost:8080/Answer?";
   xhrAnswer.open("POST", addAnswerURL, true);
   xhrAnswer.setRequestHeader('Content-type','application/json');
   xhrAnswer.onreadystatechange = function () {
@@ -76,13 +76,12 @@ function AddAnswer(qID,answerText,userId)
   var data =GetAnswerParam(qID,answer,userId);
   xhrAnswer.send(data);
 }
-function GetAnswerParam(qID,answerText,userId)
-{
-  var jsonText = {
-    text: answerText,
-    parentId: qID,
-    userId: userId
-  };
+function GetAnswerParam(qID,answerText,userId) {
+    var jsonText = {
+        parentId: qID,
+        text: answerText,
+        userId: userId
+    };
 
-  return JSON.stringify(jsonText);
+    return JSON.stringify(jsonText);
 }
