@@ -69,6 +69,8 @@ public class AnswerController
 
     @ApiOperation(value = "Return List of all  Answers")
     @GetMapping("/Answer")
+    @PermitAll
+    @CrossOrigin(origins = "http://localhost:63342")
     public List<ItemTextInfo> listInfo()
     {
         return service.ListInfo();

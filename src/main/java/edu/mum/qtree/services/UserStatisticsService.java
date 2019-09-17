@@ -1,6 +1,8 @@
 package edu.mum.qtree.services;
 
 import edu.mum.qtree.dto.TopUser;
+import edu.mum.qtree.models.custom.ChartItem;
+import edu.mum.qtree.models.custom.ItemTextInfo;
 import edu.mum.qtree.models.entities.User;
 import edu.mum.qtree.utility.UserStatisticsHelper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,11 @@ public class UserStatisticsService {
 
     @Autowired
     public UserService userService ;
+    @Autowired
+    public  QuestionService questionService;
+
+    @Autowired
+    public  AnswerService answerService;
 
     public UserStatisticsHelper uHelper = new UserStatisticsHelper() ;
 
@@ -47,6 +54,42 @@ public class UserStatisticsService {
         return updatedUsers;
     }
 
+
+
+    public List<ChartItem> chartUserQuestion(){
+        List<ChartItem> users = new ArrayList<>();
+
+        List<ItemTextInfo>  qList = questionService.ListInfo();
+        for (User u : userService.list()){
+            int reputation = 0;
+            for(ItemTextInfo q :qList) {
+                if(q.getUserId()==u.getId())
+                    reputation+=1;
+            }
+            if (reputation>0)
+                users.add(new ChartItem(u.getName(), reputation));
+        }
+        //Collections.sort(users);
+        return users;
+    }
+
+
+    public List<ChartItem> chartUserAnswer(){
+        List<ChartItem> users = new ArrayList<>();
+
+        List<ItemTextInfo>  qList = answerService.ListInfo();
+        for (User u : userService.list()){
+            int reputation = 0;
+            for(ItemTextInfo q :qList) {
+                if(q.getUserId()==u.getId())
+                    reputation+=1;
+            }
+            if (reputation>0)
+                users.add(new ChartItem(u.getName(), reputation));
+        }
+        //Collections.sort(users);
+        return users;
+    }
 
 
 }

@@ -88,7 +88,9 @@ public class QuestionController
     }
 
     @ApiOperation(value = "Return List of Questions")
+    @PermitAll
     @GetMapping("/Question")
+    @CrossOrigin(origins = "http://localhost:63342")
     public List<ItemTextInfo> listInfo()
     {
         return questionService.ListInfo();

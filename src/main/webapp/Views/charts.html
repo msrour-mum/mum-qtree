@@ -5,6 +5,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
@@ -14,10 +18,19 @@
 <body>
 <div id="piechart"></div>
 
-<h2>The XMLHttpRequest Object</h2>
+<h2>User Statistics</h2>
 
-<button type="button" onclick="ViewChart();">Request data</button>
+<button type="button" onclick="ViewChart('q');">Display User Questions</button>
+<button type="button" onclick="ViewChart('a');">Display User Answers</button>
 
-<p>Click the button several times to see if the time changes, or if the file is cached.</p>
+<p>Display User Statistics</p>
+
+<br>
+<div id="chart_divQuestions"></div>
+
+
+
+
+<div id="demo"></div>
 </body>
 <html>
