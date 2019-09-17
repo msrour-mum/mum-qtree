@@ -23,14 +23,14 @@ public class ItemSearchResult {
     }
 
     @Basic
-    @Column(name = "Text", nullable = false, length = 500)
+    @Column(name = "Text", nullable = true, length = 500)
     public void setTxt(String txt) {
         this.name = txt;
     }
 
 
     @Id
-    @Column(name = "ID", nullable = false)
+    @Column(name = "ID", nullable = true)
     public long getId() {
         return itemId;
     }

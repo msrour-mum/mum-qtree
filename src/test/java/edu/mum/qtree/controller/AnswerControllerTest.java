@@ -2,6 +2,8 @@ package edu.mum.qtree.controller;
 
 import edu.mum.qtree.controllers.AnswerController;
 import edu.mum.qtree.controllers.CommentController;
+import edu.mum.qtree.models.custom.ItemTextInfo;
+import edu.mum.qtree.models.custom.ItemTextRequest;
 import edu.mum.qtree.models.entities.Answer;
 import edu.mum.qtree.services.AnswerService;
 import edu.mum.qtree.services.CommentService;

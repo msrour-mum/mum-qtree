@@ -2,6 +2,7 @@ package edu.mum.qtree.models.custom;
 
 import edu.mum.qtree.models.entities.Tag;
 
+import javax.persistence.Column;
 import java.sql.Timestamp;
 import java.util.Collection;
 
@@ -32,6 +33,7 @@ public class ItemTextInfo {
         this.setParentId(parentId);
     }
 
+    @Column(name = "ID", nullable = true)
     public long getId() {
         return id;
     }
@@ -40,6 +42,7 @@ public class ItemTextInfo {
         this.id = id;
     }
 
+    @Column(name = "Text", nullable = true)
     public String getText() {
         return text;
     }
@@ -48,6 +51,7 @@ public class ItemTextInfo {
         this.text = text;
     }
 
+    @Column(name = "User_ID", nullable = true)
     public int getUserId() {
         return userId;
     }
@@ -56,6 +60,7 @@ public class ItemTextInfo {
         this.userId = userId;
     }
 
+    @Column(name = "Status_ID", nullable = true)
     public short getStatusId() {
         return statusId;
     }
