@@ -12,6 +12,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.PermitAll;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -27,10 +28,23 @@ public class QuestionController
 {
     @Autowired
     private QuestionService questionService;
+    @GetMapping("/Question/Info")
+    public List<Question> list()
+    {
+        return questionService.list();
+    }
 
 
     @ApiOperation(value = "Adding new Question")
+    @GetMapping("/Question/Info/{id}")
+    public Optional<Question> SelectOne(@PathVariable("id") int id)
+    {
+        return questionService.SelectOne(id);
+    }
+
+    @PermitAll
     @PostMapping ("/Question/Add")
+    @CrossOrigin(origins = "http://localhost:63342")
     public  void Add(@RequestBody ItemTextRequest  request)
     {
         Question question=new Question();
@@ -57,7 +71,10 @@ public class QuestionController
     }
 
     @ApiOperation(value = "Return list of Questions by Search ")
+    @PermitAll
+
     @GetMapping("/Question/search/{pattern}")
+    @CrossOrigin(origins = "http://localhost:63342")
     public List<ItemTextInfo> Search(@PathVariable("pattern")  String pattern)
     {
         return questionService.Search(pattern);

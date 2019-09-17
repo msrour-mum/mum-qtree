@@ -12,6 +12,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.PermitAll;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,9 +23,10 @@ public class AnswerController
     @Autowired
     private AnswerService service;
     //APIs
-
+    @PermitAll
     @ApiOperation(value = "Adding new Answer")
     @PostMapping("/Answer")
+    @CrossOrigin(origins = "http://localhost:63342")
     public  void Add(@RequestBody ItemTextRequest request)
     {
         Answer ent=new Answer();

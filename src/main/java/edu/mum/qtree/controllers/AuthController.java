@@ -17,10 +17,7 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.security.PermitAll;
 import java.util.*;
@@ -47,16 +44,14 @@ public class AuthController {
     @ApiOperation(value = "Make Login")
     @PermitAll
     @PostMapping("/signin")
+    @CrossOrigin(origins = "http://localhost:63342")
     public ResponseEntity signin(@RequestBody AuthenticationRequestDto data) {
-
         try {
             String username = data.getUsername();
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, data.getPassword()));
             String token;
-
             List<String> s = new ArrayList<>();
             token = jwtTokenProvider.createToken(username, s.add(this.users.findByEmail(username).orElseThrow(() -> new UsernameNotFoundException("Username " + username + "not found")).getUserRole().getName())) ;
-
             Map<Object, Object> model = new HashMap<>();
             model.put("username", username);
             model.put("token", token);
@@ -69,6 +64,7 @@ public class AuthController {
     @ApiOperation(value = "Make User Registration")
     @PermitAll
     @PostMapping("/signup")
+    @CrossOrigin(origins = "http://localhost:63342")
     public UserInfo signup(@RequestBody UserAddDto dto) {
 
            User user = new User();

@@ -15,7 +15,7 @@ function SignIn()
     if (xhr.readyState === 4 && xhr.status === 200) {
       var json = JSON.parse(xhr.responseText);
       setCookie('qtree_access_token',json.token,10);
-      window.location.href = "http://localhost:63342/qtree/src/main/webapp/views/index.html";
+      window.location.href = "http://localhost:63342/qtree/src/main/webapp/views/searcQ.html";
     }else if (xhr.readyState === 4 && xhr.status == 403) {
       window.alert("Wrong user name or password");
       window.location.href = "http://localhost:63342/qtree/src/main/webapp/views/login.html";

@@ -4,11 +4,14 @@ import edu.mum.qtree.models.entities.User;
 import edu.mum.qtree.services.UserService;
 import edu.mum.qtree.services.UserStatisticsService;
 import edu.mum.qtree.utility.UserStatisticsHelper;
+import org.junit.Before;
+import org.junit.Test;
 
 
 import java.util.Arrays;
 import java.util.List;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -17,19 +20,21 @@ public class UserStatisticsServiceTest {
     private User user1,user2,user3,user4,user5,user6;
     private UserStatisticsHelper helper;
     private UserService userService;
+    UserStatisticsService userStatisticsService = new UserStatisticsService();
 
-    public static void main(String[] args) {
-        UserStatisticsServiceTest c = new UserStatisticsServiceTest();
-        c.setUp() ;
-        c.updateUsersReputation();
 
-        UserStatisticsService userStatisticsService = new UserStatisticsService();
-        userStatisticsService.userService = c.userService ;
-        userStatisticsService.uHelper = c.helper;
+    @Test
+    public void testTopReputatedUser(){
+        userStatisticsService.userService = userService ;
+        userStatisticsService.uHelper =helper;
 
         System.out.println(userStatisticsService.getTopReputatedUser());
         System.out.println(userStatisticsService.getTopActiveUser());
+
+        assertEquals(6,userStatisticsService.getTopReputatedUser().get(0).getId());
     }
+
+    @Before
     public  void setUp(){
         user1 = new User();
         user1.setId(1);user1.setName("user1");
@@ -46,6 +51,9 @@ public class UserStatisticsServiceTest {
 
         helper =mock(UserStatisticsHelper.class);
         userService = mock(UserService.class);
+
+        updateUsersReputation();
+
 
     }
     public void updateUsersReputation(){

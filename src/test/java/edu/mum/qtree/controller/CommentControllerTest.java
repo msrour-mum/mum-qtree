@@ -19,6 +19,7 @@ public class CommentControllerTest {
     @InjectMocks
     CommentController commentController;
     CommentService commentService = mock(CommentService.class);
+
     Comment c1 = new Comment();Comment c2 = new Comment();Comment c3 = new Comment();
     Comment c6 = new Comment();Comment c5 = new Comment();Comment c4 = new Comment();
     List<Comment> comments = Arrays.asList(c1,c2,c3,c4,c5,c6);
